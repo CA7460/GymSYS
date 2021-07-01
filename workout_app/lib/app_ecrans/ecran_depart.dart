@@ -5,6 +5,6 @@ class EcranDepart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
-    return Text('Hello World');
+    return Text('workout options');
   }
 }
