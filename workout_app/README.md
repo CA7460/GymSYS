@@ -27,7 +27,7 @@ samples, guidance on mobile development, and a full API reference.
 6.	Commit (update local version).
 7.	Push (la nouvelle branche) vers le remote serveur (GitHub).
 8.	Aller sur GitHub vers la branche que tu viens de pusher.
-9.	Faire "New pull-request".
+9.	Faire "Compare & pull-request".
 10.	Faire un commentaire au sujet qu’été changé et s'il y des pièces questionnables.
 11.	S'il y a une issue ouverte qui correspond au problème fixé par le Pull request, assigner le Pull request à cette issue.
 12.	Faire savoir une de nous et attendre d'approuvèrent.
