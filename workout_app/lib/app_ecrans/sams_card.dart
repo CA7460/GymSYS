@@ -5,6 +5,7 @@ class SamsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
-    return Text('Sam will add a card');
+    //return Text('Sam will add a card');
+    return Text('');
   }
 }
