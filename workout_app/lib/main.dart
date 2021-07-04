@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './app_ecrans/ecran_depart.dart';
+//import './app_ecrans/ecran_depart.dart';
 import './app_ecrans/sams_card.dart';
 import './app_ecrans/siarheis_card.dart';
 import './app_ecrans/yulias_card.dart';
@@ -21,7 +21,7 @@ class MyWorkoutApp extends StatelessWidget {
           ),
           body: Column(
             children: <Widget>[
-              EcranDepart(), //Crée une instance de EcranDepart
+              //EcranDepart(), //Crée une instance de EcranDepart
               SamsCard(),
               SiarheisCard(),
               YuliasCard()
