@@ -29,15 +29,15 @@ class EcranDepart extends StatelessWidget {
 }
 
 var donnees = [
-                {'titre':'Musculation','image':'images/musculation.jpg'},
-                {'titre':'Endurance','image':'images/endurance.jpg'},
-                {'titre':'Perte de poids','image':'images/perte_de_poids.jpg'},
-                {'titre':'Puissance','image':'images/puissance.jpg'},
-                {'titre':'Flexibilité','image':'images/flexibilite.jpg'},
-                {'titre':'Cardio','image':'images/cardio.jpg'},
-                {'titre':'Maintient','image':'images/garder_la_forme.jpg'},
-                {'titre':'Abdominaux','image':'images/abdominaux.jpg'}
-              ];
+  {'titre':'Musculation','image':'images/musculation.jpg'},
+  {'titre':'Endurance','image':'images/endurance.jpg'},
+  {'titre':'Perte de poids','image':'images/perte_de_poids.jpg'},
+  {'titre':'Puissance','image':'images/puissance.jpg'},
+  {'titre':'Flexibilité','image':'images/flexibilite.jpg'},
+  {'titre':'Cardio','image':'images/cardio.jpg'},
+  {'titre':'Maintient','image':'images/garder_la_forme.jpg'},
+  {'titre':'Abdominaux','image':'images/abdominaux.jpg'}
+];
 
 
 
@@ -160,80 +160,81 @@ var donnees = [
 // );
 
 List<Widget> generateCards() {
-  
+
   List <Widget> gymCards = <Widget>[];
-  
+
   donnees.forEach((workoutGoal) =>
 
-    gymCards.add(
-      Card(
-        clipBehavior: Clip.antiAliasWithSaveLayer,
-        margin: const EdgeInsets.all(5.0),
-        elevation: 6,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.bottomLeft,
-              end: Alignment.centerRight,
-              colors: [
-                Color(0xff2e3338),
-                Color(0xff111215),
-              ],
+      gymCards.add(
+          Card(
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            margin: const EdgeInsets.all(5.0),
+            elevation: 6,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
             ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              SizedBox(
-                //height: 145, 
-                child: Image.asset(
-                  workoutGoal['image']!,
-                  fit: BoxFit.fitHeight,
+            child: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.bottomLeft,
+                  end: Alignment.centerRight,
+                  colors: [
+                    Color(0xff2e3338),
+                    Color(0xff111215),
+                  ],
                 ),
               ),
-              const Spacer(),
-              Stack(
-                // ignore: prefer_const_literals_to_create_immutables
-                children: <Widget>[
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        left: 18,
-                      ),
-                      child: Text(
-                        workoutGoal['titre']!,
-                        style: TextStyle(
-                          fontFamily: "Roboto",
-                          color: Color(0xffafb1b3),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  SizedBox(
+                    //height: 145,
+                    child: Image.asset(
+                      workoutGoal['image']!,
+                      fit: BoxFit.fitHeight,
+                    ),
+                  ),
+                  const Spacer(),
+                  Row(
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: <Widget>[
+                      Expanded(
+                        flex: 8,
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            left: 15,
+                          ),
+                          child: Text(
+                            workoutGoal['titre']!,
+                            style: TextStyle(
+                              fontFamily: "Roboto",
+                              fontSize: 18,
+                              color: Color(0xffafb1b3),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                  const Align(
-                    alignment: Alignment.centerRight,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        right: 12,
+                      Expanded(
+                        flex: 2,
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            right: 15,
+                          ),
+                          child: Icon(
+                            Icons.play_circle_fill,
+                            color: Colors.pink,
+                            size: 30.0,
+                          ),
+                        ),
                       ),
-                      child: Icon(
-                        Icons.play_circle_fill,
-                        color: Colors.pink,
-                        size: 20.0,
-                      ),
-                    ),
+                    ],
                   ),
+                  const Spacer(),
                 ],
               ),
-              const Spacer(),
-            ],
-          ),
-        ),
+            ),
+          )
       )
-    )
   );
   return gymCards;
 
