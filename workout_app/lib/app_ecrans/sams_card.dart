@@ -19,7 +19,7 @@ class SamsCard extends StatelessWidget {
         ),
         padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
         child: GridView.count(
-          shrinkWrap: true,
+          //shrinkWrap: true,
           crossAxisSpacing: 10.0,
           mainAxisSpacing: 10.0,
           crossAxisCount: 2,
