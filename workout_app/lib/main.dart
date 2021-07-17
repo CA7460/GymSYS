@@ -9,25 +9,23 @@ void main() => runApp(MyWorkoutApp());
 
 // ignore: use_key_in_widget_constructors
 class MyWorkoutApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SafeArea(
         child: Scaffold(
-          appBar: AppBar(
-            // ignore: prefer_const_constructors
-            title: Text('WORKOUT APP'),
-          ),
-          body: Column(
-            children: <Widget>[
+            appBar: AppBar(
+              // ignore: prefer_const_constructors
+              title: Text('WORKOUT APP'),
+            ),
+            body: Column(children: <Widget>[
               //EcranDepart(), //Crée une instance de EcranDepart
               SamsCard(),
               SiarheisCard(),
               YuliasCard()
-            ]
-          )
-        ),
+            ])),
       ),
     );
   }

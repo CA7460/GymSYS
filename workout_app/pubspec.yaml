@@ -59,6 +59,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+     - assets/data/exercices.json
      - images/abdominaux.jpg
      - images/cardio.jpg
      - images/endurance.jpg
@@ -67,12 +68,22 @@ flutter:
      - images/musculation.jpg
      - images/perte_de_poids.jpg
      - images/puissance.jpg
-
+     - assets/images/objectives/cardio.jpg
+     - assets/images/objectives/endurance.jpg
+     - assets/images/objectives/flexibilite.jpg
+     - assets/images/objectives/garder_la_forme.jpg
+     - assets/images/objectives/musculation.jpg
+     - assets/images/objectives/perte_de_poids.jpg
+     - assets/images/objectives/puissance.jpg
+     - assets/images/objectives/rehabilitation.jpg
+     
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
+  
+     - assets/data/exercices.json
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
