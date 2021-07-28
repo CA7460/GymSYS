@@ -12,12 +12,12 @@ class YuliasCard extends StatelessWidget {
           crossAxisSpacing: 5,
           crossAxisCount: 2,
           children: <Widget>[
-            WorkoutCard('images/high_intensite.jpg', 'High intensité'),
-            WorkoutCard('images/bruler_gras.jpg', 'Brûler le gras'),
-            WorkoutCard('images/cuisses.jpg', 'Cuisses'),
-            WorkoutCard('images/jambes.jpg', 'Jambes'),
-            WorkoutCard('images/epaules.jpg', 'Épaules'),
-            WorkoutCard('images/torse.jpg', 'Torse'),
+            WorkoutCard('assets/images/objectives/high_intensite.jpg', 'High intensité'),
+            WorkoutCard('assets/images/objectives/bruler_gras.jpg', 'Brûler le gras'),
+            WorkoutCard('assets/images/objectives/cuisses.jpg', 'Cuisses'),
+            WorkoutCard('assets/images/objectives/jambes.jpg', 'Jambes'),
+            WorkoutCard('assets/images/objectives/epaules.jpg', 'Épaules'),
+            WorkoutCard('assets/images/objectives/torse.jpg', 'Torse'),
           ],
         )
     );
