@@ -1,9 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/widgets/yulia_card_widget.dart';
+import 'package:workout_app/models/objective.dart';
+import 'package:workout_app/services/objective_services.dart';
+import 'package:flutter/services.dart' as rootBundle;
+import 'dart:convert';
+import 'dart:core';
+import 'package:flutter/foundation.dart';
+import 'dart:developer';
 
 class YuliasCard extends StatelessWidget {
+  List<Objective> objectives = [];
+
+  Future<void> readJson() async {
+    final String response = await rootBundle.rootBundle.loadString('assets/data/exercices.json');
+    /*var values = await json.decode(response);*/
+    debugPrint(response);
+    /*objectives = Objective.fromJson(values);*/
+  }
+
   @override
   Widget build(BuildContext context) {
+    readJson();
+    objectives.forEach((element)
+    {
+      print(element.name);
+    });
+
     return Container(
         color: Color(0xff3a4155),
         child: GridView.count(
@@ -12,34 +34,10 @@ class YuliasCard extends StatelessWidget {
           crossAxisSpacing: 5,
           crossAxisCount: 2,
           children: <Widget>[
-            WorkoutCard('assets/images/objectives/high_intensite.jpg', 'High intensité'),
-            WorkoutCard('assets/images/objectives/bruler_gras.jpg', 'Brûler le gras'),
-            WorkoutCard('assets/images/objectives/cuisses.jpg', 'Cuisses'),
-            WorkoutCard('assets/images/objectives/jambes.jpg', 'Jambes'),
-            WorkoutCard('assets/images/objectives/epaules.jpg', 'Épaules'),
-            WorkoutCard('assets/images/objectives/torse.jpg', 'Torse'),
+            WorkoutCard('assets/images/bruler_gras.jpg', 'High intensité')
+            /*WorkoutCard('assets/images/bruler_gras.jpg', 'High intensité')*/
           ],
         )
     );
-  }
-}
-
-class FilmsImages extends StatelessWidget
-{
-  String imagePath = '';
-
-  FilmsImages(String imagePath)
-  {
-    this.imagePath = imagePath;
-  }
-
-  @override
-  Widget build(BuildContext context)
-  {
-    // AssetImage assetImage = AssetImage('images/bruler_gras.jpg');
-    AssetImage assetImage = AssetImage(imagePath);
-    //Image image = Image(image: assetImage,width: 170.0,height: 170.0,);
-    Image image = Image(image: assetImage);
-    return Container(child: image,);
   }
 }

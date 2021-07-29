@@ -39,19 +39,5 @@ class WorkoutCard extends StatelessWidget
       ],
       )
     );
-    }
-
-      /*Container(
-        child: Column(children: <Widget>[
-          FilmsImages(image),
-          Padding(
-              padding: EdgeInsets.fromLTRB(0, 7, 0, 0),
-              child: Text(title,
-                  style: TextStyle(
-                      fontSize: 16, color: Colors.white24.withOpacity(0.9)))),
-
-        ],
-        )
-    );*/
-  //}
+  }
 }

@@ -1,13 +1,13 @@
 {
   "objectives": [
-    {"id":1, "name":"High intensité", "image":"assets/images/objectives/high_intensite.jpg"},
-    {"id":2, "name":"Brûler le gras", "image":"assets/images/objectives/bruler_gras.jpg"},
-    {"id":3, "name":"Cuisses", "image":"assets/images/objectives/cuisses.jpg"},
-    {"id":4, "name":"Jambes", "image":"assets/images/objectives/jambes.jpg"},
-    {"id":5, "name":"Épaules", "image":"assets/images/objectives/epaules.jpg"},
-    {"id":6, "name":"Torse", "image":"assets/images/objectives/torse.jpg"},
-    {"id":7, "name":"Puissance", "image":"assets/images/objectives/puissance.jpg"},
-    {"id":8, "name":"Réhabilitation", "image":"assets/images/objectives/rehabilitation.jpg"}
+    {"id":1, "name":"High intensité", "image":"assets/images/high_intensite.jpg"},
+    {"id":2, "name":"Brûler le gras", "image":"assets/images/bruler_gras.jpg"},
+    {"id":3, "name":"Cuisses", "image":"assets/images/cuisses.jpg"},
+    {"id":4, "name":"Jambes", "image":"assets/images/jambes.jpg"},
+    {"id":5, "name":"Épaules", "image":"assets/images/epaules.jpg"},
+    {"id":6, "name":"Torse", "image":"assets/images/torse.jpg"},
+    {"id":7, "name":"Puissance", "image":"assets/images/puissance.jpg"},
+    {"id":8, "name":"Réhabilitation", "image":"assets/images/rehabilitation.jpg"}
   ],
   "categories": [
     {"id":1, "name":"Biceps", "image":"assets/images/categories/biceps.jpg", "objectives":[1,4,7,8]},
