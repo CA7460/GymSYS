@@ -9,23 +9,27 @@ import 'package:flutter/foundation.dart';
 import 'dart:developer';
 
 class YuliasCard extends StatelessWidget {
-  List<Objective> objectives = [];
+  List<Widget> widgets = [];
+
+  //const YuliasCard({ @required }) : super();
 
   Future<void> readJson() async {
     final String response = await rootBundle.rootBundle.loadString('assets/data/exercices.json');
-    /*var values = await json.decode(response);*/
-    debugPrint(response);
-    /*objectives = Objective.fromJson(values);*/
+
+    var data = await jsonDecode(response)['objectives'];
+    data.forEach((element)
+    {
+      var objective = Objective.fromJson(element);
+
+      widgets.add(WorkoutCard(objective.image, objective.name));
+
+      debugPrint(objective.name);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     readJson();
-    objectives.forEach((element)
-    {
-      print(element.name);
-    });
-
     return Container(
         color: Color(0xff3a4155),
         child: GridView.count(
@@ -33,11 +37,9 @@ class YuliasCard extends StatelessWidget {
           padding: const EdgeInsets.all(5),
           crossAxisSpacing: 5,
           crossAxisCount: 2,
-          children: <Widget>[
-            WorkoutCard('assets/images/bruler_gras.jpg', 'High intensité')
-            /*WorkoutCard('assets/images/bruler_gras.jpg', 'High intensité')*/
-          ],
-        )
+          children: //widgets
+            [WorkoutCard('assets/images/bruler_gras.jpg', 'High intensité')]
+      )
     );
   }
 }
