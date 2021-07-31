@@ -60,12 +60,11 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
       - assets/data/exercices.json
-      - assets/images/background/background_image.jpg
+      - assets/images/background/background_image1.jpg
       - assets/images/objectives/high_intensite.jpg
       - assets/images/objectives/bruler_gras.jpg
       - assets/images/objectives/cuisses.jpg
       - assets/images/objectives/jambes.jpg
-      - assets/images/objectives/epaules.jpg
       - assets/images/objectives/torse.jpg
       - assets/images/objectives/puissance.jpg
       - assets/images/objectives/rehabilitation.jpg
@@ -88,6 +87,17 @@ flutter:
       - assets/images/categories/jambes.jpg
       - assets/images/categories/pectoraux.jpg
       - assets/images/categories/triceps.jpg
+      - assets/images/exercices/biceps/curl_barre.jpg
+      - assets/images/exercices/biceps/curl_pupitre.jpg
+      - assets/images/exercices/biceps/curl_concentration.jpg
+      - assets/images/exercices/biceps/curl_incline.jpg
+      - assets/images/exercices/biceps/curl_marteau.jpg
+      - assets/images/exercices/biceps/curl_pupitre_machine.jpg
+      - assets/images/exercices/biceps/curl_inverse.jpg
+      - assets/images/exercices/biceps/curl_araignee.jpg
+      - assets/images/exercices/biceps/curl_gironda.jpg
+      - assets/images/exercices/biceps/curl_zottman.jpg
+      - assets/images/exercices/biceps/curl_haltere.jpg
 #     - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

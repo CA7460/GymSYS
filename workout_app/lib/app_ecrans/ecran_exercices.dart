@@ -30,7 +30,7 @@ class EcranExercices extends StatelessWidget {
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/background_image5.jpg'),
+              image: AssetImage('assets/images/background/background_image1.jpg'),
               fit: BoxFit.cover,
             ),
           ),
