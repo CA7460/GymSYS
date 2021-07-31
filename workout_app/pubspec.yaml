@@ -98,6 +98,9 @@ flutter:
       - assets/images/exercices/biceps/curl_gironda.jpg
       - assets/images/exercices/biceps/curl_zottman.jpg
       - assets/images/exercices/biceps/curl_haltere.jpg
+      - assets/images/exercices/epaules/developpe_devant.jpg
+      - assets/images/exercices/epaules/developpe_haltere.jpg
+      - assets/images/exercices/epaules/developpe_nuque.jpg
 #     - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
