@@ -2,24 +2,23 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import './../models/exercices.dart';
 
-Future<List<Exercice>> obtenirExercicesFichierJson(BuildContext context) async {
+Future<List<Exercice>> obtenirExercicesFichierJson(BuildContext context, int id) async {
   String jsonString = await DefaultAssetBundle.of(context)
       .loadString('assets/data/exercices.json');
   List<dynamic> listeExercices = await jsonDecode(jsonString)['exercices'];
-  var items = listeExercices.map((exercice) => Exercice.fromJson(exercice)).toList().where((element) => element.categories.contains(1)).toList();
+  var items = listeExercices.map((exercice) => Exercice.fromJson(exercice)).toList().where((element) => element.categories.contains(id)).toList();
   return items;
 }
 
 class EcranExercices extends StatelessWidget {
-  var test;
-  EcranExercices(this.test);
-
+  final int id;
+  EcranExercices(this.id);
   //debugPrint(items[1].categories.contains(3).toString());
   //debugPrint(items[1].categories[1].toString());
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("TEST TEST TEST YULIA: " + test.toString());
+    debugPrint("TEST TEST TEST YULIA: " + id.toString());
     return SafeArea(
       child: Scaffold(
         backgroundColor: Color(0xff3a4155),
@@ -34,19 +33,22 @@ class EcranExercices extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          child: FutureMontrerListeExercices(),
+          child: FutureMontrerListeExercices(this.id),
         ),
       ),
     );
   }
 }
 class FutureMontrerListeExercices extends StatelessWidget {
+  final int id;
+  FutureMontrerListeExercices(this.id);
+
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Color(0xad3a4155),
       child: FutureBuilder(
-        future: obtenirExercicesFichierJson(context),
+        future: obtenirExercicesFichierJson(context, id),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             Object? donneesExercices = snapshot.data;

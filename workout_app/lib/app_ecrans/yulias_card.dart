@@ -13,8 +13,6 @@ Future<List<Objective>> obtenirObjectiveFichierJson(BuildContext context) async 
   return items;
 }
 
-var test;
-
 Future navigerEcrans(context, ecran) async {
   Navigator.push(context, MaterialPageRoute(builder: (context) => ecran));
 }
@@ -44,26 +42,21 @@ class YuliasCard extends StatelessWidget {
 }
 
 Widget obtenirGridView(context, donneesObjectives) {
-
   return GridView.builder(
     itemCount: donneesObjectives.length,
     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: MediaQuery
-          .of(context)
-          .orientation ==
-          Orientation.landscape ? 3 : 2,
+      crossAxisCount: MediaQuery.of(context).orientation == Orientation.landscape ? 3 : 2,
       crossAxisSpacing: 17,
       mainAxisSpacing: 1,
       childAspectRatio: (1 / 1),
     ),
     itemBuilder: (context, index,) {
-      //test = donneesObjectives[index].id;
       return GestureDetector(
         child: Container(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              WorkoutCard(donneesObjectives[index].image, donneesObjectives[index].name),
+              WorkoutCard(donneesObjectives[index].id, donneesObjectives[index].image, donneesObjectives[index].name),
             ],
           ),
         ),
@@ -74,16 +67,15 @@ Widget obtenirGridView(context, donneesObjectives) {
 
 class WorkoutCard extends StatelessWidget
 {
+  final int id;
   final String image;
   final String title;
 
-  WorkoutCard(this.image, this.title);
+  WorkoutCard(this.id, this.image, this.title);
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery
-        .of(context)
-        .size;
+    Size size = MediaQuery.of(context).size;
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 8),
@@ -93,7 +85,7 @@ class WorkoutCard extends StatelessWidget
         width: 195,
         child: InkWell(
             onTap: () {
-              navigerEcrans(context, EcranExercices(test));
+              navigerEcrans(context, EcranExercices(id));
             },
             child: Padding(
               padding: const EdgeInsets.all(0),
