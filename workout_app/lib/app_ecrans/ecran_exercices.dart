@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import './../models/еxercices.dart';
+import './../models/exercices.dart';
 
 Future<List<Exercice>> obtenirExercicesFichierJson(BuildContext context) async {
   String jsonString = await DefaultAssetBundle.of(context)
