@@ -1,11 +1,13 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 import 'dart:convert';
-import './ecran_exercices.dart';
-import './../models/objective.dart';
+import 'package:flutter/material.dart';
+import 'package:workout_app/models/objective.dart';
+import 'package:workout_app/models/exercices.dart';
+import 'package:workout_app/app_ecrans/yulias_card.dart';
+import 'package:workout_app/app_ecrans/ecran_exercices.dart';
 
 Future<List<Objective>> obtenirObjectiveFichierJson(BuildContext context) async {
-  String jsonString = await DefaultAssetBundle.of(context)
-      .loadString('assets/data/exercices.json');
+  String jsonString = await DefaultAssetBundle.of(context).loadString('assets/data/exercices.json');
   List<dynamic> listeObjectives = await jsonDecode(jsonString)['objectives'];
   var items = listeObjectives.map((objective) => Objective.fromJson(objective)).toList();
   return items;
