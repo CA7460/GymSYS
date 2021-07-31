@@ -49,7 +49,7 @@ class FutureMontrerListeExercices extends StatelessWidget {
         future: obtenirExercicesFichierJson(context),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            List<Exercice> donneesExercices = snapshot.data;
+            Object? donneesExercices = snapshot.data;
             return Expanded(
               child: obtenirListeView(context, donneesExercices),
             );

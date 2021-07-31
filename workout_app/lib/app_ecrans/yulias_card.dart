@@ -26,7 +26,7 @@ class YuliasCard extends StatelessWidget {
         future: obtenirObjectiveFichierJson(context),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            List<Objective> donneesObjectives = snapshot.data;
+            Object? donneesObjectives = snapshot.data;
             return Expanded(
               child: obtenirGridView(context, donneesObjectives),
             );
