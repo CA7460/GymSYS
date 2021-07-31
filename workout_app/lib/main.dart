@@ -13,11 +13,21 @@ class MyWorkoutApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: SafeArea(
         child: Scaffold(
-            appBar: AppBar(
-              backgroundColor: Color(0xff3c505e),
-              title: Text('WORKOUT APP'),
+          backgroundColor: Color(0xff3a4155),
+          appBar: AppBar(
+            title: Text('WORKOUT APP', style: TextStyle(color: Color(0xff489b9b))),
+            centerTitle: true,
+            backgroundColor: Color(0xff3c505e),
+          ),
+          body: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/background_image5.jpg'),
+                fit: BoxFit.cover,
+              ),
             ),
-            body: YuliasCard()
+            child:  YuliasCard(), //aussi new EcranDepart() mais le new n'est pas obligatoire
+          ),
         ),
       ),
     );

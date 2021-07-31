@@ -59,15 +59,35 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-      - assets/images/high_intensite.jpg
-      - assets/images/bruler_gras.jpg
-      - assets/images/cuisses.jpg
-      - assets/images/jambes.jpg
-      - assets/images/epaules.jpg
-      - assets/images/torse.jpg
-      - assets/images/puissance.jpg
-      - assets/images/rehabilitation.jpg
       - assets/data/exercices.json
+      - assets/images/background/background_image.jpg
+      - assets/images/objectives/high_intensite.jpg
+      - assets/images/objectives/bruler_gras.jpg
+      - assets/images/objectives/cuisses.jpg
+      - assets/images/objectives/jambes.jpg
+      - assets/images/objectives/epaules.jpg
+      - assets/images/objectives/torse.jpg
+      - assets/images/objectives/puissance.jpg
+      - assets/images/objectives/rehabilitation.jpg
+      - assets/images/objectives/cardio.jpg
+      - assets/images/objectives/endurance.jpg
+      - assets/images/objectives/flexibilite.jpg
+      - assets/images/objectives/garder_la_forme.jpg
+      - assets/images/objectives/musculation.jpg
+      - assets/images/objectives/perte_de_poids.jpg
+      - assets/images/objectives/puissance.jpg
+      - assets/images/objectives/rehabilitation.jpg
+      - assets/images/categories/abdominaux.jpg
+      - assets/images/categories/biceps.jpg
+      - assets/images/categories/course.jpg
+      - assets/images/categories/dos.jpg
+      - assets/images/categories/epaules.jpg
+      - assets/images/categories/etirements.jpg
+      - assets/images/categories/fessiers.jpg
+      - assets/images/categories/focus.jpg
+      - assets/images/categories/jambes.jpg
+      - assets/images/categories/pectoraux.jpg
+      - assets/images/categories/triceps.jpg
 #     - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
