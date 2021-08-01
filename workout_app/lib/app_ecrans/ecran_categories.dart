@@ -1,35 +1,65 @@
-import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:workout_app/models/objective.dart';
-import 'package:workout_app/models/exercices.dart';
-import 'package:workout_app/app_ecrans/yulias_card.dart';
-import 'package:workout_app/app_ecrans/ecran_exercices.dart';
-import 'package:workout_app/app_ecrans/ecran_categories.dart';
+import './../models/categorie.dart';
+import 'ecran_exercices.dart';
 
-Future<List<Objective>> obtenirObjectiveFichierJson(BuildContext context) async {
-  String jsonString = await DefaultAssetBundle.of(context).loadString('assets/data/exercices.json');
-  List<dynamic> listeObjectives = await jsonDecode(jsonString)['objectives'];
-  var items = listeObjectives.map((objective) => Objective.fromJson(objective)).toList();
+Future<List<Categorie>> obtenirCategoriesFichierJson(BuildContext context, int id) async {
+  String jsonString = await DefaultAssetBundle.of(context)
+      .loadString('assets/data/exercices.json');
+  List<dynamic> listeCategories = await jsonDecode(jsonString)['categories'];
+  var items = listeCategories.map((categories) => Categorie.fromJson(categories)).toList().where((element) => element.objectives.contains(id)).toList();
   return items;
 }
 
 Future navigerEcrans(context, ecran) async {
   Navigator.push(context, MaterialPageRoute(builder: (context) => ecran));
 }
+class EcranCategories extends StatelessWidget {
+  final int id;
+  final String category;
+  EcranCategories (this.id, this.category);
+  //debugPrint(items[1].categories.contains(3).toString());
+  //debugPrint(items[1].categories[1].toString());
 
-class YuliasCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    debugPrint("TEST TEST TEST YULIA: " + id.toString());
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Color(0xff3a4155),
+        appBar: AppBar(
+          title: Text(category, style: TextStyle(color: Color(0xff489b9b))),
+          centerTitle: true,
+          backgroundColor: Color(0xff3c505e),
+        ),
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/background/background_image1.jpg'),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: FutureMontrerListeCategories(this.id),
+        ),
+      ),
+    );
+  }
+}
+class FutureMontrerListeCategories extends StatelessWidget {
+  final int id;
+  FutureMontrerListeCategories(this.id);
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xda3a4155),
+      color: Color(0xad3a4155),
       child: FutureBuilder(
-        future: obtenirObjectiveFichierJson(context),
+        future: obtenirCategoriesFichierJson(context, id),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            Object? donneesObjectives = snapshot.data;
+            Object? donneesCategories = snapshot.data;
             return Expanded(
-              child: obtenirGridView(context, donneesObjectives),
+              child: obtenirGridView(context, donneesCategories),
             );
           } else {
             return Center(
@@ -42,9 +72,9 @@ class YuliasCard extends StatelessWidget {
   }
 }
 
-Widget obtenirGridView(context, donneesObjectives) {
+Widget obtenirGridView(context, donneesCategories) {
   return GridView.builder(
-    itemCount: donneesObjectives.length,
+    itemCount: donneesCategories.length,
     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
       crossAxisCount: MediaQuery.of(context).orientation == Orientation.landscape ? 3 : 2,
       crossAxisSpacing: 17,
@@ -57,7 +87,7 @@ Widget obtenirGridView(context, donneesObjectives) {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              WorkoutCard(donneesObjectives[index].id, donneesObjectives[index].image, donneesObjectives[index].name),
+              WorkoutCard(donneesCategories[index].id, donneesCategories[index].image, donneesCategories[index].name),
             ],
           ),
         ),
@@ -86,7 +116,7 @@ class WorkoutCard extends StatelessWidget
         width: 195,
         child: InkWell(
             onTap: () {
-              navigerEcrans(context, EcranCategories(id, title));
+              navigerEcrans(context, EcranExercices(id, title));
             },
             child: Padding(
               padding: const EdgeInsets.all(0),
@@ -114,10 +144,7 @@ class WorkoutCard extends StatelessWidget
                           width: 150,
                           color: Color(0xc53a4155),
                           padding: EdgeInsets.all(10),
-                          child: Text(
-                              title,
-                              style: TextStyle(fontSize: 16, color: Color(
-                                  0xffc8f1f1)),
+                          child: Text(title, style: TextStyle(fontSize: 16, color: Color(0xffc8f1f1)),
                               textAlign: TextAlign.center
                           ),
                         ),

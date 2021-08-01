@@ -99,6 +99,29 @@ flutter:
       - assets/images/exercices/epaules/developpe_devant.jpg
       - assets/images/exercices/epaules/developpe_haltere.jpg
       - assets/images/exercices/epaules/developpe_nuque.jpg
+      - assets/images/exercices/dos/dos_intro_tirage_serre.jpg
+      - assets/images/exercices/dos/dos_intro_rowing_barre.jpg
+      - assets/images/exercices/dos/dos_intro_trapezes.jpg
+      - assets/images/exercices/abdominaux/abdominaux_intro_exercices.jpg
+      - assets/images/exercices/abdominaux/abdominaux_intro_sit_up.jpg
+      - assets/images/exercices/abdominaux/abdominaux_intro_gainage_musculation.jpg
+      - assets/images/exercices/abdominaux/abdominaux_intro-pallof.jpg
+      - assets/images/exercices/pectoraux/pectoraux_intro_ecarte_incline.jpg
+      - assets/images/exercices/pectoraux/pectoraux_intro_dips_2_bancs.jpg
+      - assets/images/exercices/pectoraux/pectoraux_intro_convergent.jpg
+      - assets/images/exercices/jambes/jambes_intro_mollets.jpg
+      - assets/images/exercices/jambes/jambes_intro_mollets_assis.jpg
+      - assets/images/exercices/course/course_comment_recommencer_a_courir.jpeg
+      - assets/images/exercices/course/course_begin_courir.png
+      - assets/images/exercices/fessiers/fessiers_intro_leg_curl.jpg
+      - assets/images/exercices/fessiers/fessiers_intro_squat_1_jambe.jpg
+      - assets/images/exercices/fessiers/fessiers_intro_leg_extension.jpg
+      - assets/images/exercices/fessiers/fessiers_intro_presse_cuisses.jpg
+      - assets/images/exercices/etirements/etirements_intro_stretching.jpg
+      - assets/images/exercices/etirements/etirements_intro_flexions_laterales.jpg
+      - assets/images/exercices/etirements/etirements_dos.jpg
+      - assets/images/exercices/focus/focus_intro_ischios.jpg
+      - assets/images/exercices/focus/focus_intro_programme_lombaires.jpg
 #     - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

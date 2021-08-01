@@ -12,9 +12,8 @@ Future<List<Exercice>> obtenirExercicesFichierJson(BuildContext context, int id)
 
 class EcranExercices extends StatelessWidget {
   final int id;
-  EcranExercices(this.id);
-  //debugPrint(items[1].categories.contains(3).toString());
-  //debugPrint(items[1].categories[1].toString());
+  final String exercices;
+  EcranExercices(this.id, this.exercices);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,8 @@ class EcranExercices extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Color(0xff3a4155),
         appBar: AppBar(
-          title: Text('Biceps'),
+          title: Text(exercices, style: TextStyle(color: Color(0xff489b9b))),
+          centerTitle: true,
           backgroundColor: Color(0xff3c505e),
         ),
         body: Container(
