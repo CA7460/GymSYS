@@ -61,19 +61,17 @@ flutter:
   assets:
       - assets/data/exercices.json
       - assets/images/background/background_image1.jpg
-      - assets/images/objectives/high_intensite.jpg
-      - assets/images/objectives/bruler_gras.jpg
-      - assets/images/objectives/cuisses.jpg
-      - assets/images/objectives/jambes.jpg
-      - assets/images/objectives/torse.jpg
-      - assets/images/objectives/puissance.jpg
-      - assets/images/objectives/rehabilitation.jpg
       - assets/images/objectives/cardio.jpg
-      - assets/images/objectives/endurance.jpg
-      - assets/images/objectives/flexibilite.jpg
-      - assets/images/objectives/garder_la_forme.jpg
-      - assets/images/objectives/musculation.jpg
+      - assets/images/objectives/cardio2.jpg
       - assets/images/objectives/perte_de_poids.jpg
+      - assets/images/objectives/perte_de_poids2.jpg
+      - assets/images/objectives/garder_la_forme.jpg
+      - assets/images/objectives/garder_la_forme2.jpg
+      - assets/images/objectives/endurance.jpg
+      - assets/images/objectives/endurance2.jpg
+      - assets/images/objectives/musculation.jpg
+      - assets/images/objectives/flexibilite.jpg
+      - assets/images/objectives/flexibilite2.jpg
       - assets/images/objectives/puissance.jpg
       - assets/images/objectives/rehabilitation.jpg
       - assets/images/categories/abdominaux.jpg

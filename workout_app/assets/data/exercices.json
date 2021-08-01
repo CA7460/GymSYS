@@ -1,11 +1,11 @@
 {
   "objectives": [
-    {"id":1, "name":"High intensité", "image":"assets/images/objectives/high_intensite.jpg"},
-    {"id":2, "name":"Brûler le gras", "image":"assets/images/objectives/bruler_gras.jpg"},
-    {"id":3, "name":"Cuisses", "image":"assets/images/objectives/cuisses.jpg"},
-    {"id":4, "name":"Jambes", "image":"assets/images/objectives/jambes.jpg"},
-    {"id":5, "name":"Biceps", "image":"assets/images/objectives/musculation.jpg"},
-    {"id":6, "name":"Torse", "image":"assets/images/objectives/torse.jpg"},
+    {"id":1, "name":"Cardio", "image":"assets/images/objectives/cardio2.jpg"},
+    {"id":2, "name":"Perte de poids", "image":"assets/images/objectives/perte_de_poids2.jpg"},
+    {"id":3, "name":"Garder la forme", "image":"assets/images/objectives/garder_la_forme2.jpg"},
+    {"id":4, "name":"Endurance", "image":"assets/images/objectives/endurance2.jpg"},
+    {"id":5, "name":"Musculation", "image":"assets/images/objectives/musculation.jpg"},
+    {"id":6, "name":"Flexibilité", "image":"assets/images/objectives/flexibilite2.jpg"},
     {"id":7, "name":"Puissance", "image":"assets/images/objectives/puissance.jpg"},
     {"id":8, "name":"Réhabilitation", "image":"assets/images/objectives/rehabilitation.jpg"}
   ],
