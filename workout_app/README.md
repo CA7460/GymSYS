@@ -16,6 +16,7 @@ For help getting started with Flutter, view our
 samples, guidance on mobile development, and a full API reference.
 
 ## Les instructions pour utilisation de Git
+- Version August 1, 2021
 
 1.	S'il n'y a pas Issue ouvert qui correspond à votre tâche, il faut créer un nouveau Issue (GitHub).
 2.	Update local development branch.
