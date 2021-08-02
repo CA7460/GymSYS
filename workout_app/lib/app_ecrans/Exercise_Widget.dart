@@ -3,28 +3,23 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:workout_app/models/objective.dart';
 import 'package:workout_app/models/exercices.dart';
-import 'package:workout_app/app_ecrans/yulias_card.dart';
+import 'package:workout_app/app_ecrans/Exercise_Widget.dart';
 import 'package:workout_app/app_ecrans/ecran_exercices.dart';
 import 'package:workout_app/app_ecrans/ecran_categories.dart';
-
-Future<List<Objective>> obtenirObjectiveFichierJson(BuildContext context) async {
-  String jsonString = await DefaultAssetBundle.of(context).loadString('assets/data/exercices.json');
-  List<dynamic> listeObjectives = await jsonDecode(jsonString)['objectives'];
-  var items = listeObjectives.map((objective) => Objective.fromJson(objective)).toList();
-  return items;
-}
+import 'package:workout_app/services/services.dart';
+import 'package:workout_app/widgets/category_screen_widget.dart';
 
 Future navigerEcrans(context, ecran) async {
   Navigator.push(context, MaterialPageRoute(builder: (context) => ecran));
 }
 
-class YuliasCard extends StatelessWidget {
+class ExerciseWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Color(0xda3a4155),
       child: FutureBuilder(
-        future: obtenirObjectiveFichierJson(context),
+        future: obtenirObjectiveFichierJson(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             Object? donneesObjectives = snapshot.data;
@@ -86,7 +81,7 @@ class WorkoutCard extends StatelessWidget
         width: 195,
         child: InkWell(
             onTap: () {
-              navigerEcrans(context, EcranCategories(id, title));
+              navigerEcrans(context, CategoryScreenWidget(id, title));
             },
             child: Padding(
               padding: const EdgeInsets.all(0),

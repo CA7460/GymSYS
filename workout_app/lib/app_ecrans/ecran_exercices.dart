@@ -1,14 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import './../models/exercices.dart';
-
-Future<List<Exercice>> obtenirExercicesFichierJson(BuildContext context, int id) async {
-  String jsonString = await DefaultAssetBundle.of(context)
-      .loadString('assets/data/exercices.json');
-  List<dynamic> listeExercices = await jsonDecode(jsonString)['exercices'];
-  var items = listeExercices.map((exercice) => Exercice.fromJson(exercice)).toList().where((element) => element.categories.contains(id)).toList();
-  return items;
-}
+import 'package:workout_app/services/services.dart';
 
 class EcranExercices extends StatelessWidget {
   final int id;
@@ -48,7 +41,7 @@ class FutureMontrerListeExercices extends StatelessWidget {
     return Container(
       color: Color(0xad3a4155),
       child: FutureBuilder(
-        future: obtenirExercicesFichierJson(context, id),
+        future: obtenirExercicesFichierJson(id),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             Object? donneesExercices = snapshot.data;

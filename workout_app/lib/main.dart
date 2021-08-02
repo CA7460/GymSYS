@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import './app_ecrans/ecran_depart.dart';
-import './app_ecrans/sams_card.dart';
-import './app_ecrans/siarheis_card.dart';
-import './app_ecrans/yulias_card.dart';
+import './app_ecrans/Exercise_Widget.dart';
 
 void main() => runApp(MyWorkoutApp());
 
@@ -26,7 +24,7 @@ class MyWorkoutApp extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            child:  YuliasCard(), //aussi new EcranDepart() mais le new n'est pas obligatoire
+            child: ExerciseWidget(), //aussi new EcranDepart() mais le new n'est pas obligatoire
           ),
         ),
       ),
