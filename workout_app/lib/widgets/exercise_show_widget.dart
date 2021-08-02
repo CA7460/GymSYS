@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/services/services.dart';
-import 'package:workout_app/widgets/category_grid_view_widget.dart';
+import 'package:workout_app/widgets/exercise_list_view_widget.dart';
 
-class CategoryShowWidget extends StatelessWidget {
+class ExerciseShowWidget extends StatelessWidget {
   final int id;
-  CategoryShowWidget(this.id);
+  ExerciseShowWidget(this.id);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Color(0xad3a4155),
       child: FutureBuilder(
-        future: obtenirCategoriesFichierJson(id),
+        future: obtenirExercicesFichierJson(id),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            Object? donneesCategories = snapshot.data;
+            var donneesExercices = snapshot.data;
             return Expanded(
-              child: CategoryGridViewWidget(donneesCategories),
+              child: ExerciseListViewWidget(donneesExercices),
             );
           } else {
             return Center(

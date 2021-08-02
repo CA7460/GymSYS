@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import './app_ecrans/ecran_depart.dart';
-import './app_ecrans/Exercise_Widget.dart';
+import 'package:workout_app/widgets/exercise_widget.dart';
 
-void main() => runApp(MyWorkoutApp());
+void main() => runApp(WorkoutApp());
 
-class MyWorkoutApp extends StatelessWidget {
+class WorkoutApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -31,4 +30,3 @@ class MyWorkoutApp extends StatelessWidget {
     );
   }
 }
-

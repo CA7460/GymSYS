@@ -1,10 +1,11 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:workout_app/widgets/category_show_widget.dart';
+import 'package:workout_app/widgets/exercise_show_widget.dart';
 
-class CategoryScreenWidget extends StatelessWidget {
+class ExerciseScreenWidget extends StatelessWidget {
   final int id;
-  final String category;
-  CategoryScreenWidget (this.id, this.category);
+  final String exercices;
+  ExerciseScreenWidget(this.id, this.exercices);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,7 @@ class CategoryScreenWidget extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Color(0xff3a4155),
         appBar: AppBar(
-          title: Text(category, style: TextStyle(color: Color(0xff489b9b))),
+          title: Text(exercices, style: TextStyle(color: Color(0xff489b9b))),
           centerTitle: true,
           backgroundColor: Color(0xff3c505e),
         ),
@@ -23,7 +24,7 @@ class CategoryScreenWidget extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          child: CategoryShowWidget(this.id),
+          child: ExerciseShowWidget(this.id),
         ),
       ),
     );
