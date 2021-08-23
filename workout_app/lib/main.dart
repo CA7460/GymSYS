@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-//import 'package:flutter_stetho/flutter_stetho.dart';
+// import 'package:flutter_stetho/flutter_stetho.dart';
 import 'package:workout_app/widgets/exercise_widget.dart';
 
-void main() => {/*Stetho.initialize(),*/ runApp(WorkoutApp())};
+void main() => {/*Stetho.initialize(), */runApp(WorkoutApp())};
 
 class WorkoutApp extends StatelessWidget {
   @override
