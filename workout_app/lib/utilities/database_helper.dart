@@ -88,13 +88,8 @@ class DatabaseHelper {
     }
 
     for (var exercice in exercices) {
-      await db.execute("INSERT INTO $tableExercices values (?, ?, ?, ?, ?)", [
-        null,
-        exercice.name,
-        exercice.description,
-        exercice.image,
-        exercice.categories
-      ]);
+      await db.execute("INSERT INTO $tableExercices values (?, ?, ?, ?, ?)", 
+      [null, exercice.name, exercice.description, exercice.image, exercice.categories]);
     }
   }
 
@@ -207,6 +202,17 @@ class DatabaseHelper {
     return categorieObjectList;
   }
 
+  // Get Categories for a specific Objective
+  Future<List<Categorie>> getCategorieListFor(int id) async {
+    List<Categorie> categorieObjectList = [];
+    var categorieMapList = await getCategoriesMapList();
+    categorieObjectList = categorieMapList
+        .map((oneMap) => Categorie.fromMapToObject(oneMap))
+        .toList().where((element) => element.objectives.contains(id))
+        .toList();
+    return categorieObjectList;
+  }
+
 // ================================================================
 // =============== CRUD OPERATIONS FOR EXERCICES ==================
 // ================================================================
@@ -255,6 +261,17 @@ class DatabaseHelper {
     var exerciceMapList = await getExercicesMapList();
     exerciceObjectList = exerciceMapList
         .map((oneMap) => Exercice.fromMapToObject(oneMap))
+        .toList();
+    return exerciceObjectList;
+  }
+
+  // Get Exercices for a specific Categorie
+  Future<List<Exercice>> getExerciceListFor(int id) async {
+    List<Exercice> exerciceObjectList = [];
+    var exerciceMapList = await getExercicesMapList();
+    exerciceObjectList = exerciceMapList
+        .map((oneMap) => Exercice.fromMapToObject(oneMap))
+        .toList().where((element) => element.categories.contains(id))
         .toList();
     return exerciceObjectList;
   }
