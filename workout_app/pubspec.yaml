@@ -30,6 +30,11 @@ dependencies:
   flutter:
     sdk: flutter
 
+  string_validator: ^0.1.4
+  sqflite: any
+  path_provider: any
+  intl: ^0.16.1
+  # flutter_stetho: ^0.5.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

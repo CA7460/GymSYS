@@ -12,8 +12,8 @@ class CategoryGridViewWidget extends StatelessWidget
       itemCount: donneesCategories.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: MediaQuery.of(context).orientation == Orientation.landscape ? 3 : 2,
-        crossAxisSpacing: 17,
-        mainAxisSpacing: 1,
+        crossAxisSpacing: 0,
+        mainAxisSpacing: 0,
         childAspectRatio: (1 / 1),
       ),
       itemBuilder: (context, index,) {

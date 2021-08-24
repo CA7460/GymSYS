@@ -19,7 +19,7 @@
         {"id":7, "name":"Jambes", "image":"assets/images/categories/jambes.jpg", "objectives":[1,2,3,4,6,7,8]},
         {"id":8, "name":"Course", "image":"assets/images/categories/course.jpg", "objectives":[2,3,6,7]},
         {"id":9, "name":"Fessiers", "image":"assets/images/categories/fessiers.jpg", "objectives":[1,3,7]},
-        {"id":10, "name":"Étirements", "image":"assets/images/categories/etirements.jpg", "objectives":[3,5,7,8]},
+        {"id":10, "name":"Étirements", "image":"assets/images/categories/etirements.jpg", "objectives":[3,5,6,7,8]},
         {"id":11, "name":"Focus", "image":"assets/images/categories/focus.jpg", "objectives":[1,2,3,4,6,7,8]}
     ],
     "exercices": [
