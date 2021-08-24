@@ -5,8 +5,7 @@ Future navigerEcrans(context, ecran) async {
   Navigator.push(context, MaterialPageRoute(builder: (context) => ecran));
 }
 
-class ExerciseWorkoutWidget extends StatelessWidget
-{
+class ExerciseWorkoutWidget extends StatelessWidget {
   final int id;
   final String image;
   final String title;
@@ -15,56 +14,47 @@ class ExerciseWorkoutWidget extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final maxWidthForCard = screenWidth / 2;
+    final cardSize = maxWidthForCard - 20;
+    final labelWidth = cardSize - 26;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 8),
-
-      child: Container(
-        height: 195,
-        width: 195,
-        child: InkWell(
-            onTap: () {
-              navigerEcrans(context, CategoryScreenWidget(id, title));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(0),
-              child: Row(
-                children: [
-                  Stack(
-                    children: [
-                      Container(
-                        width: 180,
-                        height: 180,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20.0),
-                          child: Image(
-                            image: AssetImage(image),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 10,
-                        left: 15,
-                        child: Container(
-                          // We use this Container to create a black box that wraps the white text so that the user can read the text even when the image is white
-                          width: 150,
-                          color: Color(0xc53a4155),
-                          padding: EdgeInsets.all(10),
-                          child: Text(
-                              title,
-                              style: TextStyle(fontSize: 16, color: Color(0xffc8f1f1)),
-                              textAlign: TextAlign.center
-                          ),
-                        ),
-                      )
-                    ],
-                  )
-                ],
+    return InkWell(
+      onTap: () {
+        navigerEcrans(context, CategoryScreenWidget(id, title));
+      },
+      child: Column(
+        children: [
+          Stack(
+            children: [
+              Container(
+                width: cardSize,
+                height: cardSize,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20.0),
+                  child: Image(
+                    image: AssetImage(image),
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
-            )
-        ),
+              Positioned(
+                bottom: 14,
+                left: (cardSize - labelWidth) / 2,
+                child: Container(
+                  // black box that wraps the white text
+                  width: labelWidth,
+                  color: Color(0xc53a4155),
+                  padding: EdgeInsets.all(10),
+                  child: Text(title,
+                      style: TextStyle(
+                          fontSize: 16, color: Color(0xffc8f1f1)),
+                      textAlign: TextAlign.center),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

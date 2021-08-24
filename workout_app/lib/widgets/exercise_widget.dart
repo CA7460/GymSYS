@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/models/objective.dart';
-import 'package:workout_app/models/exercices.dart';
-import 'package:workout_app/services/services.dart';
-import 'package:workout_app/widgets//exercice_screen_widget.dart';
-import 'package:workout_app/widgets/category_screen_widget.dart';
-import 'package:workout_app/widgets/category_grid_view_widget.dart';
-import 'package:workout_app/widgets/exercise_workout_widget.dart';
+// import 'package:workout_app/models/exercices.dart';
+// import 'package:workout_app/services/services.dart';
+// import 'package:workout_app/widgets//exercice_screen_widget.dart';
+// import 'package:workout_app/widgets/category_screen_widget.dart';
+// import 'package:workout_app/widgets/category_grid_view_widget.dart';
+// import 'package:workout_app/widgets/exercise_workout_widget.dart';
 import 'package:workout_app/widgets/exercise_grid_view_widget.dart';
 import 'package:workout_app/utilities/database_helper.dart';
 
@@ -36,7 +36,7 @@ class ExerciseWidget extends StatelessWidget {
               child: ExerciseGridViewWidget(donneesObjectives),
             );
           } else {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
