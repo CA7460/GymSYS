@@ -17,14 +17,12 @@ class ExerciseGridViewWidget extends StatelessWidget {
       ),
       itemBuilder: (context, index,) {
         return GestureDetector(
-          //child: Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ExerciseWorkoutWidget(donneesObjectives[index].id, donneesObjectives[index].image, donneesObjectives[index].name),
-              ],
-            ),
-          //),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ExerciseWorkoutWidget(donneesObjectives[index].id, donneesObjectives[index].image, donneesObjectives[index].name),
+            ],
+          ),
         );
       },
     );
