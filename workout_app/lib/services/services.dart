@@ -4,6 +4,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import '../models/objective.dart';
 import '../models/exercices.dart';
 import '../models/categorie.dart';
+import '../models/details.dart';
 
 // Future<List<Objective>> obtenirObjectiveFichierJson() async {
 //   String jsonString = await rootBundle.loadString('assets/data/exercices.json');
@@ -33,19 +34,28 @@ import '../models/categorie.dart';
 //       .toList();
 // }
 
+Future<List<Details>> obtenirDetailsFichierJson(int id) async {
+  String jsonString = await rootBundle.loadString('assets/data/details.json');
+  List<dynamic> listeDetails = await jsonDecode(jsonString);
+  return listeDetails.map((details) => Details.fromJson(details)).toList();
+}
 
 // MÉTHODES POUR POPULER LA DATABASE LORS DE SON INITIALISATION
 
 Future<List<Objective>> getObjectivesFromJsonFile() async {
   String jsonString = await rootBundle.loadString('assets/data/exercices.json');
   List<dynamic> listeObjectives = await jsonDecode(jsonString)['objectives'];
-  return listeObjectives.map((objective) => Objective.fromJson(objective)).toList();
+  return listeObjectives
+      .map((objective) => Objective.fromJson(objective))
+      .toList();
 }
 
 Future<List<Categorie>> getCategoriesFromJsonFile() async {
   String jsonString = await rootBundle.loadString('assets/data/exercices.json');
   List<dynamic> listeCategories = await jsonDecode(jsonString)['categories'];
-  return listeCategories.map((categories) => Categorie.fromJson(categories)).toList();
+  return listeCategories
+      .map((categories) => Categorie.fromJson(categories))
+      .toList();
 }
 
 Future<List<Exercice>> getExercicesFromJsonFile() async {
