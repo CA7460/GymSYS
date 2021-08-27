@@ -34,15 +34,15 @@ import '../models/details.dart';
 //       .toList();
 // }
 
-Future<List<Details>> obtenirDetailsFichierJson(int id) async {
-  String jsonString = await rootBundle.loadString('assets/data/details.json');
-  List<dynamic> listeDetails = await jsonDecode(jsonString);
-  return listeDetails
-      .map((details) => Details.fromJson(details))
-      .toList()
-      .where((element) => element.exerciceID == id)
-      .toList();
-}
+// Future<List<Details>> obtenirDetailsFichierJson(int id) async {
+//   String jsonString = await rootBundle.loadString('assets/data/details.json');
+//   List<dynamic> listeDetails = await jsonDecode(jsonString);
+//   return listeDetails
+//       .map((details) => Details.fromJson(details))
+//       .toList()
+//       .where((element) => element.exerciceID == id)
+//       .toList();
+// }
 
 // MÉTHODES POUR POPULER LA DATABASE LORS DE SON INITIALISATION
 
