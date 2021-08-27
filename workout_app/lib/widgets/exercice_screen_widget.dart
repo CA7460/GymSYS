@@ -10,16 +10,11 @@ class ExerciseScreenWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AdatpativeAppBar exerciceAppBar = AdatpativeAppBar(exercices);
+    final AdatpativeAppBar exerciceAppBar = AdatpativeAppBar(exercices.toUpperCase());
     return SafeArea(
       child: Scaffold(
         backgroundColor: Color(0xff3a4155),
         appBar: exerciceAppBar,
-        // AppBar(
-        //   title: Text(exercices, style: TextStyle(color: Color(0xff489b9b))),
-        //   centerTitle: true,
-        //   backgroundColor: Color(0xff3c505e),
-        // ),
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(

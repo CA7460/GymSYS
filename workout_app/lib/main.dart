@@ -8,7 +8,7 @@ class WorkoutApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AdatpativeAppBar homeAppBar = AdatpativeAppBar('WORKOUT APP');
+    final AdatpativeAppBar homeAppBar = AdatpativeAppBar('WORKOUT GOALS');
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SafeArea(

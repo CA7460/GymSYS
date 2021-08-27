@@ -34,6 +34,7 @@ dependencies:
   sqflite: any
   path_provider: any
   intl: ^0.16.1
+  youtube_player_flutter: ^8.0.0
   # flutter_stetho: ^0.5.2
 
   # The following adds the Cupertino Icons font to your application.
@@ -128,6 +129,7 @@ flutter:
     - assets/images/exercices/etirements/etirements_dos.jpg
     - assets/images/exercices/focus/focus_intro_ischios.jpg
     - assets/images/exercices/focus/focus_intro_programme_lombaires.jpg
+    - assets/images/expansion/dumbell_icon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
