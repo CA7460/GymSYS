@@ -38,8 +38,10 @@ Future<List<Details>> obtenirDetailsFichierJson(int id) async {
   String jsonString = await rootBundle.loadString('assets/data/details.json');
   List<dynamic> listeDetails = await jsonDecode(jsonString);
   return listeDetails
-    .map((details) => Details.fromJson(details)).toList()
-    .where((element) => element.exerciceID == id).toList();
+      .map((details) => Details.fromJson(details))
+      .toList()
+      .where((element) => element.exerciceID == id)
+      .toList();
 }
 
 // MÉTHODES POUR POPULER LA DATABASE LORS DE SON INITIALISATION
@@ -64,4 +66,11 @@ Future<List<Exercice>> getExercicesFromJsonFile() async {
   String jsonString = await rootBundle.loadString('assets/data/exercices.json');
   List<dynamic> listeExercices = await jsonDecode(jsonString)['exercices'];
   return listeExercices.map((exercice) => Exercice.fromJson(exercice)).toList();
+}
+
+Future<List<Details>> getDetailsFromJsonFile() async {
+  String jsonString = await rootBundle.loadString('assets/data/details.json');
+  List<dynamic> listeDetails = await jsonDecode(jsonString);
+  return listeDetails.map((details) => Details.fromJson(details)).toList();
+  //.where((element) => element.exerciceID == id).toList();
 }

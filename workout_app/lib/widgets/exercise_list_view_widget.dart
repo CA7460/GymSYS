@@ -47,7 +47,7 @@ class ExerciseListViewWidget extends StatelessWidget {
                       child: PopupMenuButton(
                           icon: Icon(
                             Icons.edit,
-                            color: Colors.white,
+                            color: Color(0xff489b9b),
                             size: 18,
                           ),
                           onSelected: (item) =>
@@ -75,7 +75,7 @@ class ExerciseListViewWidget extends StatelessWidget {
                       child: PopupMenuButton(
                           icon: Icon(
                             Icons.delete,
-                            color: Colors.white,
+                            color: Color(0xff489b9b),
                             size: 18,
                           ),
                           onSelected: (item) =>
@@ -125,7 +125,7 @@ class ExerciseListViewWidget extends StatelessWidget {
                                     child: Text(
                                       donneesExercices[index].name,
                                       style: TextStyle(
-                                          fontWeight: FontWeight.bold,
+                                          fontWeight: FontWeight.w400,
                                           fontSize: 18,
                                           color: Color(0xff489b9b)),
                                       maxLines: 2,

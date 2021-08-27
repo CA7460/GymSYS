@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:workout_app/utilities/database_helper.dart';
 import 'package:workout_app/models/exercices.dart';
 import 'package:workout_app/widgets/appbar.dart';
 import 'package:workout_app/services/services.dart';
@@ -11,12 +12,14 @@ class ExerciceDetailsScreenWidget extends StatelessWidget {
   final Exercice _exercice;
   ExerciceDetailsScreenWidget(this._exercice);
 
+  DatabaseHelper databaseHelper = DatabaseHelper();
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     const sidePadding = 18.0;
     final imageWidth = screenWidth - (sidePadding * 2);
-    final AdatpativeAppBar categoryAppBar = AdatpativeAppBar(_exercice.name.toUpperCase());
+    final AdatpativeAppBar categoryAppBar = AdatpativeAppBar(_exercice.name);
 
     List<ExpansionItem> expansionItems;
 
@@ -38,8 +41,8 @@ class ExerciceDetailsScreenWidget extends StatelessWidget {
               padding: EdgeInsets.only(
                   top: sidePadding, left: sidePadding, right: sidePadding),
               child: FutureBuilder(
-                //future: _loadDetailssFromDatabase(id),
-                future: obtenirDetailsFichierJson(_exercice.id),
+                future: _loadDetailsFromDatabase(_exercice.id),
+                //future: obtenirDetailsFichierJson(_exercice.id),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     Object? donneesDetails = snapshot.data;
@@ -85,8 +88,6 @@ class ExerciceDetailsScreenWidget extends StatelessWidget {
                               child: Container(
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
-                                  //width: MediaQuery.of(context).size.width / 1.2,
-                                  //height: MediaQuery.of(context).size.height / 4,
                                   child: YoutubePlayer(
                                     controller: _controller,
                                     liveUIColor: Colors.amber,
@@ -95,25 +96,12 @@ class ExerciceDetailsScreenWidget extends StatelessWidget {
                               ),
                             ),
                           ),
-                 
                           const SizedBox(
                             height: sidePadding,
                           ),
                           Expanded(
                             child: ExpansionDetails(expansionItems),
                           ),
-                          // Container(
-                          //   width: imageWidth,
-                          //   child: Container(
-                          //     child: ClipRRect(
-                          //       borderRadius: BorderRadius.circular(30),
-                          //       child: Image.asset(
-                          //         _exercice.image,
-                          //         fit: BoxFit.cover,
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
                         ],
                       ),
                     );
@@ -131,6 +119,12 @@ class ExerciceDetailsScreenWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<List<Details>> _loadDetailsFromDatabase(int id) async {
+    await databaseHelper.initializeDatabase();
+    List<Details> detailsListMap = await databaseHelper.getDetailsForExercice(id);
+    return detailsListMap;
   }
 }
 
@@ -153,7 +147,6 @@ class _ExpansionDetailsState extends State<ExpansionDetails> {
       itemBuilder: (BuildContext context, int index) {
         return ExpansionPanelList(
           animationDuration: Duration(milliseconds: 600),
-          dividerColor: Colors.red,
           elevation: 1,
           children: [
             ExpansionPanel(

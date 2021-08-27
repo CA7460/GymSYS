@@ -4,6 +4,7 @@ import 'package:path/path.dart';
 import 'package:workout_app/models/objective.dart';
 import 'package:workout_app/models/categorie.dart';
 import 'package:workout_app/models/exercices.dart';
+import 'package:workout_app/models/details.dart';
 import 'package:workout_app/services/services.dart';
 
 class DatabaseHelper {
@@ -28,6 +29,14 @@ class DatabaseHelper {
   String colExerciceImage = 'image';
   String colExerciceCategories = 'categories';
 
+  String tableDetails = 'details';
+  String colDetailId = 'id';
+  String colDetailExerciceID = 'exerciceID';
+  String colLongDescription = 'longDescription';
+  String colMuscles = 'muscles';
+  String colExecution = 'execution';
+  String colYoutubeLink = 'youtubeLink';
+
   DatabaseHelper._createInstance(); // constructeur nommé pour créer une instance de DatabaseHelper
 
   factory DatabaseHelper() {
@@ -51,6 +60,9 @@ class DatabaseHelper {
     String path = join(databasesPath, 'workoutDB.db');
     print(path);
 
+    // effacer la database rapidement, laisser en commentaire pour test seulement 
+    // await deleteDatabase(path);
+
     //Créer et ouvrir la base de données
     var workoutDB = await openDatabase(path, version: 1, onCreate: _createDb);
     return workoutDB;
@@ -70,12 +82,16 @@ class DatabaseHelper {
     await db.execute(
         'CREATE TABLE $tableExercices($colExerciceId INTEGER PRIMARY KEY AUTOINCREMENT, $colExerciceName TEXT, '
         '$colExerciceDescription TEXT, $colExerciceImage TEXT, $colExerciceCategories INTEGER[])');
+    await db.execute(
+        'CREATE TABLE $tableDetails($colDetailId INTEGER PRIMARY KEY AUTOINCREMENT, $colDetailExerciceID INTEGER, '
+        '$colLongDescription TEXT, $colMuscles TEXT, $colExecution TEXT, $colYoutubeLink TEXT)');
 
     print('Database created');
 
     final objectives = await getObjectivesFromJsonFile();
     final categories = await getCategoriesFromJsonFile();
     final exercices = await getExercicesFromJsonFile();
+    final details = await getDetailsFromJsonFile();
 
     for (var objective in objectives) {
       await db.execute("INSERT INTO $tableObjectives values (?, ?, ?)",
@@ -88,8 +104,24 @@ class DatabaseHelper {
     }
 
     for (var exercice in exercices) {
-      await db.execute("INSERT INTO $tableExercices values (?, ?, ?, ?, ?)", 
-      [null, exercice.name, exercice.description, exercice.image, exercice.categories]);
+      await db.execute("INSERT INTO $tableExercices values (?, ?, ?, ?, ?)", [
+        null,
+        exercice.name,
+        exercice.description,
+        exercice.image,
+        exercice.categories
+      ]);
+    }
+
+    for (var detail in details) {
+      await db.execute("INSERT INTO $tableDetails values (?, ?, ?, ?, ?, ?)", [
+        null,
+        detail.exerciceID,
+        detail.longDescription,
+        detail.muscles,
+        detail.execution,
+        detail.youtubeLink
+      ]);
     }
   }
 
@@ -208,7 +240,8 @@ class DatabaseHelper {
     var categorieMapList = await getCategoriesMapList();
     categorieObjectList = categorieMapList
         .map((oneMap) => Categorie.fromMapToObject(oneMap))
-        .toList().where((element) => element.objectives.contains(id))
+        .toList()
+        .where((element) => element.objectives.contains(id))
         .toList();
     return categorieObjectList;
   }
@@ -271,8 +304,34 @@ class DatabaseHelper {
     var exerciceMapList = await getExercicesMapList();
     exerciceObjectList = exerciceMapList
         .map((oneMap) => Exercice.fromMapToObject(oneMap))
-        .toList().where((element) => element.categories.contains(id))
+        .toList()
+        .where((element) => element.categories.contains(id))
         .toList();
     return exerciceObjectList;
   }
+
+// ================================================================
+// ================= CRUD OPERATIONS FOR DETAILS ==================
+// ================================================================
+
+  Future<List<Map<String, dynamic>>> getDetailsMapList() async {
+    Database db = await database;
+    var resultat = await db.query(tableDetails);
+    return resultat;
+  }
+
+  Future<List<Details>> getDetailsForExercice(int id) async {
+    //String jsonString = await rootBundle.loadString('assets/data/details.json');
+    List<Details> detailsObjectList = [];
+    var detailsMapList = await getDetailsMapList();
+    detailsObjectList = detailsMapList
+        .map((details) => Details.fromJson(details))
+        .toList()
+        .where((element) => element.exerciceID == id)
+        .toList();
+    return detailsObjectList;
+  }
+
+// ADD CRUD OPERATIONS HERE
+
 }
