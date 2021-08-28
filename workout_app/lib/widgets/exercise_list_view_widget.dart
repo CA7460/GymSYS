@@ -22,7 +22,8 @@ class ExerciseListViewWidget extends StatelessWidget {
             navigerEcrans(
                 context,
                 ExerciceDetailsScreenWidget(
-                    donneesExercices[index] as Exercice)
+                    donneesExercices[index] as Exercice
+                )
             );
           },
           child: Padding(
@@ -46,20 +47,7 @@ class ExerciseListViewWidget extends StatelessWidget {
                     Positioned(
                       top: 0,
                       right: 35,
-                      child: FlatButton(
-                        child: Icon(
-                          Icons.edit,
-                          color: Color(0xff489b9b),
-                          size: 18,
-                        ),
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return ExerciseModifyWidget(donneesExercices[index] as Exercice);
-                              });
-                        },
-                      ),
+                      child: ExerciseModifyWidget(donneesExercices[index] as Exercice)
                     ),
                     Positioned(
                       top: 0,
