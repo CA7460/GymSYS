@@ -60,7 +60,7 @@ class DatabaseHelper {
     String path = join(databasesPath, 'workoutDB.db');
     print(path);
 
-    // effacer la database rapidement, laisser en commentaire pour test seulement 
+    // effacer la database rapidement, laisser en commentaire, pour test seulement 
     // await deleteDatabase(path);
 
     //Créer et ouvrir la base de données
