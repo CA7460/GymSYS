@@ -9,16 +9,11 @@ class CategoryScreenWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AdatpativeAppBar categoryAppBar = AdatpativeAppBar(category);
+    final AdatpativeAppBar categoryAppBar = AdatpativeAppBar(category.toUpperCase());
     return SafeArea(
       child: Scaffold(
         backgroundColor: Color(0xff3a4155),
         appBar: categoryAppBar,
-        // AppBar(
-        //   title: Text(category, style: TextStyle(color: Color(0xff489b9b))),
-        //   centerTitle: true,
-        //   backgroundColor: Color(0xff3c505e),
-        // ),
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
