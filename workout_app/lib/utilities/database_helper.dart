@@ -130,42 +130,34 @@ class DatabaseHelper {
 // ================================================================
 
   Future<List<Map<String, dynamic>>> getObjectviesMapList() async {
-    Database db = await database; //Appel Ã  la mÃ©thode get database
-    //var resultat =
-    //await db.rawQuery('SELECT * FROM $tableFilms order by $colTitre ASC');
-    var resultat =
-        await db.query(tableObjectives, orderBy: '$colObjectiveName ASC');
-    //print(resultat);
+    Database db = await database;
+    var resultat = await db.query(tableObjectives, orderBy: '$colObjectiveName ASC');
     return resultat;
   }
 
   Future<int> addObjective(Objective oneObjective) async {
     Database db = await database;
-    var resultat =
-        await db.insert(tableObjectives, oneObjective.fromObjectToMap());
+    var resultat = await db.insert(tableObjectives, oneObjective.fromObjectToMap());
     return resultat;
   }
 
   Future<int> modidifyObjective(Objective oneObjective) async {
     var db = await database;
-    var resultat = await db.update(
-        tableObjectives, oneObjective.fromObjectToMap(),
+    var resultat = await db.update(tableObjectives, oneObjective.fromObjectToMap(),
         where: '$colObjectiveId = ?', whereArgs: [oneObjective.id]);
     return resultat;
   }
 
   Future<int> removeObjective(int id) async {
     var db = await database;
-    int resultat = await db
-        .rawDelete('DELETE FROM $tableObjectives WHERE $colObjectiveId = $id');
+    int resultat = await db.rawDelete('DELETE FROM $tableObjectives WHERE $colObjectiveId = $id');
     return resultat;
   }
 
   //Obtenir le nombre d'OBJECTIVES dans la bd
   Future<int> objectiveCount() async {
     Database db = await database;
-    List<Map<String, dynamic>> objectiveList =
-        await db.rawQuery('SELECT COUNT (*) from $tableObjectives');
+    List<Map<String, dynamic>> objectiveList = await db.rawQuery('SELECT COUNT (*) from $tableObjectives');
     int? objectiveCount = Sqflite.firstIntValue(objectiveList);
     return objectiveCount ?? 0;
   }
@@ -176,9 +168,7 @@ class DatabaseHelper {
     var objectiveMapList =
         await getObjectviesMapList(); //Liste map de la base de données
     //Créer la liste d'objets Objective à partir de objectiveMapList
-    objectiveObjectList = objectiveMapList
-        .map((oneMap) => Objective.fromMapToObject(oneMap))
-        .toList();
+    objectiveObjectList = objectiveMapList.map((oneMap) => Objective.fromMapToObject(oneMap)).toList();
     return objectiveObjectList;
   }
 
@@ -188,38 +178,33 @@ class DatabaseHelper {
 
   Future<List<Map<String, dynamic>>> getCategoriesMapList() async {
     Database db = await database;
-    var resultat =
-        await db.query(tableCategories, orderBy: '$colCategorieName ASC');
+    var resultat = await db.query(tableCategories, orderBy: '$colCategorieName ASC');
     return resultat;
   }
 
   Future<int> addCategorie(Categorie oneCategorie) async {
     Database db = await database;
-    var resultat =
-        await db.insert(tableCategories, oneCategorie.fromObjectToMap());
+    var resultat = await db.insert(tableCategories, oneCategorie.fromObjectToMap());
     return resultat;
   }
 
   Future<int> modidifyCategorie(Categorie oneCategorie) async {
     var db = await database;
-    var resultat = await db.update(
-        tableCategories, oneCategorie.fromObjectToMap(),
+    var resultat = await db.update(tableCategories, oneCategorie.fromObjectToMap(),
         where: '$colCategorieId = ?', whereArgs: [oneCategorie.id]);
     return resultat;
   }
 
   Future<int> removeCategorie(int id) async {
     var db = await database;
-    int resultat = await db
-        .rawDelete('DELETE FROM $tableCategories WHERE $colCategorieId = $id');
+    int resultat = await db.rawDelete('DELETE FROM $tableCategories WHERE $colCategorieId = $id');
     return resultat;
   }
 
   //Obtenir le nombre de CATEGORIES dans la bd
   Future<int> categorieCount() async {
     Database db = await database;
-    List<Map<String, dynamic>> categorieList =
-        await db.rawQuery('SELECT COUNT (*) from $tableCategories');
+    List<Map<String, dynamic>> categorieList = await db.rawQuery('SELECT COUNT (*) from $tableCategories');
     int? categorieCount = Sqflite.firstIntValue(categorieList);
     return categorieCount ?? 0;
   }
@@ -229,8 +214,7 @@ class DatabaseHelper {
     List<Categorie> categorieObjectList = [];
     var categorieMapList = await getCategoriesMapList();
     categorieObjectList = categorieMapList
-        .map((oneMap) => Categorie.fromMapToObject(oneMap))
-        .toList();
+        .map((oneMap) => Categorie.fromMapToObject(oneMap)).toList();
     return categorieObjectList;
   }
 
@@ -239,10 +223,8 @@ class DatabaseHelper {
     List<Categorie> categorieObjectList = [];
     var categorieMapList = await getCategoriesMapList();
     categorieObjectList = categorieMapList
-        .map((oneMap) => Categorie.fromMapToObject(oneMap))
-        .toList()
-        .where((element) => element.objectives.contains(id))
-        .toList();
+        .map((oneMap) => Categorie.fromMapToObject(oneMap)).toList()
+        .where((element) => element.objectives.contains(id)).toList();
     return categorieObjectList;
   }
 
@@ -252,38 +234,33 @@ class DatabaseHelper {
 
   Future<List<Map<String, dynamic>>> getExercicesMapList() async {
     Database db = await database;
-    var resultat =
-        await db.query(tableExercices, orderBy: '$colExerciceName ASC');
+    var resultat = await db.query(tableExercices, orderBy: '$colExerciceName ASC');
     return resultat;
   }
 
   Future<int> addExercice(Exercice oneExercice) async {
     Database db = await database;
-    var resultat =
-        await db.insert(tableExercices, oneExercice.fromObjectToMap());
+    var resultat = await db.insert(tableExercices, oneExercice.fromObjectToMap());
     return resultat;
   }
 
   Future<int> modidifyExercice(Exercice oneExercice) async {
     var db = await database;
-    var resultat = await db.update(
-        tableExercices, oneExercice.fromObjectToMap(),
+    var resultat = await db.update(tableExercices, oneExercice.fromObjectToMap(),
         where: '$colExerciceId = ?', whereArgs: [oneExercice.id]);
     return resultat;
   }
 
   Future<int> removeExercice(int id) async {
     var db = await database;
-    int resultat = await db
-        .rawDelete('DELETE FROM $tableExercices WHERE $colExerciceId = $id');
+    int resultat = await db.rawDelete('DELETE FROM $tableExercices WHERE $colExerciceId = $id');
     return resultat;
   }
 
   //Obtenir le nombre d'EXERCICES dans la bd
   Future<int> exerciceCount() async {
     Database db = await database;
-    List<Map<String, dynamic>> exerciceList =
-        await db.rawQuery('SELECT COUNT (*) from $tableExercices');
+    List<Map<String, dynamic>> exerciceList = await db.rawQuery('SELECT COUNT (*) from $tableExercices');
     int? exerciceCount = Sqflite.firstIntValue(exerciceList);
     return exerciceCount ?? 0;
   }
@@ -293,8 +270,7 @@ class DatabaseHelper {
     List<Exercice> exerciceObjectList = [];
     var exerciceMapList = await getExercicesMapList();
     exerciceObjectList = exerciceMapList
-        .map((oneMap) => Exercice.fromMapToObject(oneMap))
-        .toList();
+        .map((oneMap) => Exercice.fromMapToObject(oneMap)).toList();
     return exerciceObjectList;
   }
 
@@ -303,10 +279,8 @@ class DatabaseHelper {
     List<Exercice> exerciceObjectList = [];
     var exerciceMapList = await getExercicesMapList();
     exerciceObjectList = exerciceMapList
-        .map((oneMap) => Exercice.fromMapToObject(oneMap))
-        .toList()
-        .where((element) => element.categories.contains(id))
-        .toList();
+        .map((oneMap) => Exercice.fromMapToObject(oneMap)).toList()
+        .where((element) => element.categories.contains(id)).toList();
     return exerciceObjectList;
   }
 
@@ -321,17 +295,11 @@ class DatabaseHelper {
   }
 
   Future<List<Details>> getDetailsForExercice(int id) async {
-    //String jsonString = await rootBundle.loadString('assets/data/details.json');
     List<Details> detailsObjectList = [];
     var detailsMapList = await getDetailsMapList();
     detailsObjectList = detailsMapList
-        .map((details) => Details.fromJson(details))
-        .toList()
-        .where((element) => element.exerciceID == id)
-        .toList();
+        .map((details) => Details.fromJson(details)).toList()
+        .where((element) => element.exerciceID == id).toList();
     return detailsObjectList;
   }
-
-// ADD CRUD OPERATIONS HERE
-
 }

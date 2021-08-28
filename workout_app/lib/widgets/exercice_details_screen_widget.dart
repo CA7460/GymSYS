@@ -42,14 +42,12 @@ class ExerciceDetailsScreenWidget extends StatelessWidget {
                   top: sidePadding, left: sidePadding, right: sidePadding),
               child: FutureBuilder(
                 future: _loadDetailsFromDatabase(_exercice.id),
-                //future: obtenirDetailsFichierJson(_exercice.id),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     Object? donneesDetails = snapshot.data;
                     List<Details> detailsList = donneesDetails as List<Details>;
                     Details details = detailsList[0];
 
-                    // Utiliser le if statement pour remplir une collection
                     expansionItems = <ExpansionItem>[
                       ExpansionItem(
                           header: "Description",

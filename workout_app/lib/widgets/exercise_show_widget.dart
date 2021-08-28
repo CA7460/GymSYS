@@ -16,7 +16,6 @@ class ExerciseShowWidget extends StatelessWidget {
       color: Color(0xad3a4155),
       child: FutureBuilder(
         future: _loadExercicesFromDatabase(id),
-        //future: obtenirExercicesFichierJson(id),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             var donneesExercices = snapshot.data;

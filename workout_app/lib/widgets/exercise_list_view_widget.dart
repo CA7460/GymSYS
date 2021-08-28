@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/widgets/exercice_details_screen_widget.dart';
 import 'package:workout_app/models/exercices.dart';
+import 'package:workout_app/widgets/exercise_modify_widget.dart';
 
 Future navigerEcrans(context, ecran) async {
   Navigator.push(context, MaterialPageRoute(builder: (context) => ecran));
@@ -21,7 +22,8 @@ class ExerciseListViewWidget extends StatelessWidget {
             navigerEcrans(
                 context,
                 ExerciceDetailsScreenWidget(
-                    donneesExercices[index] as Exercice));
+                    donneesExercices[index] as Exercice)
+            );
           },
           child: Padding(
             padding:
@@ -44,30 +46,20 @@ class ExerciseListViewWidget extends StatelessWidget {
                     Positioned(
                       top: 0,
                       right: 35,
-                      child: PopupMenuButton(
-                          icon: Icon(
-                            Icons.edit,
-                            color: Color(0xff489b9b),
-                            size: 18,
-                          ),
-                          onSelected: (item) =>
-                              _onSelected(context, item as int),
-                          itemBuilder: (context) => [
-                                PopupMenuItem(
-                                  value: 0,
-                                  child: Row(
-                                    children: <Widget>[
-                                      Icon(
-                                        Icons.edit,
-                                        color: Colors.black,
-                                        size: 22,
-                                      ),
-                                      SizedBox(width: 25),
-                                      Text('Modifier'),
-                                    ],
-                                  ),
-                                ),
-                              ]),
+                      child: FlatButton(
+                        child: Icon(
+                          Icons.edit,
+                          color: Color(0xff489b9b),
+                          size: 18,
+                        ),
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return ExerciseModifyWidget(donneesExercices[index] as Exercice);
+                              });
+                        },
+                      ),
                     ),
                     Positioned(
                       top: 0,
