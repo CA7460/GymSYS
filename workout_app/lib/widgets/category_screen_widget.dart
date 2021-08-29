@@ -21,7 +21,7 @@ class CategoryScreenWidget extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          child: CategoryShowWidget(this.id),
+          child: CategoryShowWidget(id),
         ),
       ),
     );

@@ -57,6 +57,7 @@ Future<List<Objective>> getObjectivesFromJsonFile() async {
 Future<List<Categorie>> getCategoriesFromJsonFile() async {
   String jsonString = await rootBundle.loadString('assets/data/exercices.json');
   List<dynamic> listeCategories = await jsonDecode(jsonString)['categories'];
+  print('were here baby');
   return listeCategories
       .map((categories) => Categorie.fromJson(categories))
       .toList();

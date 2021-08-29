@@ -60,7 +60,7 @@ class DatabaseHelper {
     String path = join(databasesPath, 'workoutDB.db');
     print(path);
 
-    // effacer la database rapidement, laisser en commentaire, pour test seulement 
+    // effacer la database rapidement, laisser en commentaire, pour test seulement
     // await deleteDatabase(path);
 
     //Créer et ouvrir la base de données
@@ -78,10 +78,10 @@ class DatabaseHelper {
         '$colObjectiveImage TEXT)');
     await db.execute(
         'CREATE TABLE $tableCategories($colCategorieId INTEGER PRIMARY KEY AUTOINCREMENT, $colCategorieName TEXT, '
-        '$colCategorieImage TEXT, $colCategorieObjectives INTEGER[])');
+        '$colCategorieImage TEXT, $colCategorieObjectives TEXT)');
     await db.execute(
         'CREATE TABLE $tableExercices($colExerciceId INTEGER PRIMARY KEY AUTOINCREMENT, $colExerciceName TEXT, '
-        '$colExerciceDescription TEXT, $colExerciceImage TEXT, $colExerciceCategories INTEGER[])');
+        '$colExerciceDescription TEXT, $colExerciceImage TEXT, $colExerciceCategories TEXT)');
     await db.execute(
         'CREATE TABLE $tableDetails($colDetailId INTEGER PRIMARY KEY AUTOINCREMENT, $colDetailExerciceID INTEGER, '
         '$colLongDescription TEXT, $colMuscles TEXT, $colExecution TEXT, $colYoutubeLink TEXT)');
@@ -89,8 +89,16 @@ class DatabaseHelper {
     print('Database created');
 
     final objectives = await getObjectivesFromJsonFile();
+
+    print('objectives from JSON OK');
+
     final categories = await getCategoriesFromJsonFile();
+
+    print('categories from JSON OK');
+
     final exercices = await getExercicesFromJsonFile();
+
+    print('exercices from JSON OK');
     final details = await getDetailsFromJsonFile();
 
     for (var objective in objectives) {
@@ -98,10 +106,14 @@ class DatabaseHelper {
           [null, objective.name, objective.image]);
     }
 
+    print('objective table populated');
+
     for (var categorie in categories) {
       await db.execute("INSERT INTO $tableCategories values (?, ?, ?, ?)",
           [null, categorie.name, categorie.image, categorie.objectives]);
     }
+
+    print('categories table populated');
 
     for (var exercice in exercices) {
       await db.execute("INSERT INTO $tableExercices values (?, ?, ?, ?, ?)", [
@@ -113,6 +125,8 @@ class DatabaseHelper {
       ]);
     }
 
+    print('exercices table populated');
+
     for (var detail in details) {
       await db.execute("INSERT INTO $tableDetails values (?, ?, ?, ?, ?, ?)", [
         null,
@@ -123,6 +137,8 @@ class DatabaseHelper {
         detail.youtubeLink
       ]);
     }
+
+    print('details table populated');
   }
 
 // ================================================================
@@ -238,12 +254,22 @@ class DatabaseHelper {
   Future<List<Categorie>> getCategorieListFor(int id) async {
     List<Categorie> categorieObjectList = [];
     var categorieMapList = await getCategoriesMapList();
+    print('were here again babyyyyy!');
     categorieObjectList = categorieMapList
         .map((oneMap) => Categorie.fromMapToObject(oneMap))
         .toList()
-        .where((element) => element.objectives.contains(id))
+        .where((element) => element.objectives.contains(id.toString()))
         .toList();
+    print('and we go on');
     return categorieObjectList;
+  }
+
+  Future<List<String>> getCategorieNames() async {
+    Database db = await database;
+    List<String> categorieNames =
+        await db.rawQuery('SELECT $colCategorieName from $tableCategories')
+            as List<String>;
+    return categorieNames;
   }
 
 // ================================================================
@@ -261,6 +287,7 @@ class DatabaseHelper {
     Database db = await database;
     var resultat =
         await db.insert(tableExercices, oneExercice.fromObjectToMap());
+    print('tu bruuuuules');
     return resultat;
   }
 
@@ -305,7 +332,7 @@ class DatabaseHelper {
     exerciceObjectList = exerciceMapList
         .map((oneMap) => Exercice.fromMapToObject(oneMap))
         .toList()
-        .where((element) => element.categories.contains(id))
+        .where((element) => element.categories.contains(id.toString()))
         .toList();
     return exerciceObjectList;
   }
@@ -334,4 +361,23 @@ class DatabaseHelper {
 
 // ADD CRUD OPERATIONS HERE
 
+  Future<int> modidifyDetails(Details oneDetail) async {
+    var db = await database;
+    var resultat = await db.update(tableDetails, oneDetail.fromObjectToMap(),
+        where: '$colDetailId = ?', whereArgs: [oneDetail.id]);
+    return resultat;
+  }
+
+  Future<int> removeDetails(int id) async {
+    var db = await database;
+    int resultat = await db
+        .rawDelete('DELETE FROM $tableDetails WHERE $colExerciceId = $id');
+    return resultat;
+  }
+
+  Future<int> addDetails(Details oneDetail) async {
+    Database db = await database;
+    var resultat = await db.insert(tableDetails, oneDetail.fromObjectToMap());
+    return resultat;
+  }
 }

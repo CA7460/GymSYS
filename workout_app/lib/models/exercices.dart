@@ -3,7 +3,8 @@ class Exercice {
   String _name;
   String _image;
   String _description;
-  List<dynamic> _categories;
+  // List<int> _categories;
+  String _categories;
 
   Exercice(
       this._id, this._name, this._image, this._description, this._categories);
@@ -13,7 +14,8 @@ class Exercice {
   String get name => _name;
   String get image => _image;
   String get description => _description;
-  List<dynamic> get categories => _categories;
+  // List<int> get categories => _categories;
+  String get categories => _categories;
 
   set id(int id) {
     _id = id;
@@ -34,7 +36,11 @@ class Exercice {
     _description = description;
   }
 
-  set categories(List<dynamic> categories) {
+  // set categories(List<int> categories) {
+  //   _categories = categories;
+  // }
+
+  set categories(String categories) {
     _categories = categories;
   }
 
@@ -44,6 +50,7 @@ class Exercice {
         _name = json['name'],
         _image = json['image'],
         _description = json['description'],
+        // _categories = List<int>.from(json['categories']);
         _categories = json['categories'];
 
   Exercice.fromMapToObject(Map<String, dynamic> map)
@@ -58,6 +65,10 @@ class Exercice {
     var map = Map<String, dynamic>();
     if (_id != null) {
       map['id'] = _id;
+    }
+    if (_id == 0) {
+      map['id'] = null;
+      print('ok next moove tu va lavoir');
     }
     map['name'] = _name;
     map['image'] = _image;

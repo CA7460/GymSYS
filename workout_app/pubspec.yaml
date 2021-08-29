@@ -30,7 +30,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  string_validator: ^0.1.4
+  # string_validator: ^0.1.4
   sqflite: any
   path_provider: any
   intl: ^0.16.1
@@ -92,6 +92,7 @@ flutter:
     - assets/images/categories/jambes.jpg
     - assets/images/categories/pectoraux.jpg
     - assets/images/categories/triceps.jpg
+    - assets/images/exercices/default_img.jpg
     - assets/images/exercices/biceps/curl_barre.jpg
     - assets/images/exercices/biceps/curl_pupitre.jpg
     - assets/images/exercices/biceps/curl_concentration.jpg

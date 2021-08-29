@@ -64,7 +64,11 @@ class Details {
     var map = Map<String, dynamic>();
     if (_id != null) {
       map['id'] = _id;
+    } 
+    if (_id == 0) {
+      map['id'] = null;
     }
+
     map['exerciceID'] = _exerciceID;
     map['longDescription'] = _longDescription;
     map['muscles'] = _muscles;
