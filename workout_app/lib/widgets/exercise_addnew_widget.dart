@@ -91,7 +91,7 @@ class ExerciseAddNewWidget extends StatelessWidget {
               ),
 
               RaisedButton(
-                  child: Text("Update"),
+                  child: Text("Add New Exercise"),
                   onPressed: () {
                     //print(categories.toString());
                 //    databaseHelper.modidifyExercice(Exercice(exercice.id, title, image, detail, categories));

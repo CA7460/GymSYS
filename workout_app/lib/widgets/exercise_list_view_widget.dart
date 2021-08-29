@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/widgets/exercice_details_screen_widget.dart';
 import 'package:workout_app/models/exercices.dart';
-import 'package:workout_app/widgets/exercise_modify_widget.dart';
+import 'package:workout_app/utilities/database_helper.dart';
+import 'exercise_update_widget.dart';
 
 Future navigerEcrans(context, ecran) async {
   Navigator.push(context, MaterialPageRoute(builder: (context) => ecran));
@@ -10,6 +11,7 @@ Future navigerEcrans(context, ecran) async {
 class ExerciseListViewWidget extends StatelessWidget {
   var donneesExercices;
   ExerciseListViewWidget(this.donneesExercices);
+  DatabaseHelper databaseHelper = DatabaseHelper();
 
   Widget build(context) {
     Size size = MediaQuery.of(context).size;
@@ -47,7 +49,19 @@ class ExerciseListViewWidget extends StatelessWidget {
                     Positioned(
                       top: 0,
                       right: 35,
-                      child: ExerciseModifyWidget(donneesExercices[index] as Exercice)
+                      child: FlatButton(
+                        child: Icon(
+                          Icons.edit,
+                          color: Color(0xff489b9b),
+                          size: 18,
+                        ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => ExerciseUpdateWidget(donneesExercices[index])),
+                            );
+                          }
+                      )
                     ),
                     Positioned(
                       top: 0,

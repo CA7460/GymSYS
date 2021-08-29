@@ -13,7 +13,12 @@ class ExerciseUpdateWidget extends StatelessWidget {
     String title = this.exercice.name;
     String detail = this.exercice.description;
     String image = this.exercice.image;
-    List<dynamic> categories = this.exercice.categories as List<dynamic>;
+    List<dynamic> categories = this.exercice.categories;
+
+    List<int> results = List.filled(0, 0, growable: true);
+    //categories.forEach((element) { results.add(element + 1); });
+
+    results.forEach((element) {print(element);});
 
 /*    String categories1 = "";
     databaseHelper.getCategorieList().then((value) => value.forEach((element) {
@@ -73,7 +78,7 @@ class ExerciseUpdateWidget extends StatelessWidget {
                   icon: Icon(Icons.ballot_outlined),
                 ),
                 initialValue: exercice.categories.toString(),
-                onChanged: (value) => categories = value as List<dynamic>,
+                onChanged: (value) => (value as List<dynamic>).forEach((element) {results.add(element);}),
               ),
 
               TextFormField(
@@ -89,10 +94,13 @@ class ExerciseUpdateWidget extends StatelessWidget {
               ),
 
               RaisedButton(
-                  child: Text("Update"),
+                  child: Text("Modifier"),
                   onPressed: () {
                     //print(categories.toString());
-                    databaseHelper.modidifyExercice(Exercice(exercice.id, title, image, detail, categories));
+
+                    results.forEach((element) {print(element);});
+
+                    databaseHelper.modidifyExercice(Exercice(exercice.id, title, image, detail, results));
 
                     print(exercice.categories.toString());
                     //Navigator.of(context).pushReplacement(databaseHelper.getExerciceList().then((value) => ExerciseListViewWidget(value)));
