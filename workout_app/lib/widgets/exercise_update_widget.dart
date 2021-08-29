@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/utilities/database_helper.dart';
 import 'package:workout_app/models/exercices.dart';
+import 'dart:convert';
 
 class ExerciseUpdateWidget extends StatelessWidget {
   final Exercice exercice;
@@ -13,19 +14,7 @@ class ExerciseUpdateWidget extends StatelessWidget {
     String title = this.exercice.name;
     String detail = this.exercice.description;
     String image = this.exercice.image;
-    List<dynamic> categories = this.exercice.categories;
-
-    List<int> results = List.filled(0, 0, growable: true);
-    //categories.forEach((element) { results.add(element + 1); });
-
-    results.forEach((element) {print(element);});
-
-/*    String categories1 = "";
-    databaseHelper.getCategorieList().then((value) => value.forEach((element) {
-      print(element.name);
-      categories1 += element.name;
-      print(categories1);
-    }));*/
+    var categories = this.exercice.categories.toList();
 
     return SafeArea(
       child: Scaffold(
@@ -78,7 +67,9 @@ class ExerciseUpdateWidget extends StatelessWidget {
                   icon: Icon(Icons.ballot_outlined),
                 ),
                 initialValue: exercice.categories.toString(),
-                onChanged: (value) => (value as List<dynamic>).forEach((element) {results.add(element);}),
+
+
+                onChanged: (value) => categories = json.decode(value),
               ),
 
               TextFormField(
@@ -96,74 +87,17 @@ class ExerciseUpdateWidget extends StatelessWidget {
               RaisedButton(
                   child: Text("Modifier"),
                   onPressed: () {
-                    //print(categories.toString());
 
-                    results.forEach((element) {print(element);});
-
-                    databaseHelper.modidifyExercice(Exercice(exercice.id, title, image, detail, results));
-
-                    print(exercice.categories.toString());
-                    //Navigator.of(context).pushReplacement(databaseHelper.getExerciceList().then((value) => ExerciseListViewWidget(value)));
-                    //databaseHelper.getExerciceList().then((value) => Navigator.push(context, MaterialPageRoute(builder: (context) => )));
+                    print(categories);
+                    databaseHelper.modidifyExercice(Exercice(exercice.id, title, image, detail, categories));
 
                     Navigator.pop(context);
-
-                    //Navigator.of(context).pop(false);
-
                   }
               ),
-              //Text("Test"),
-
             ],
-
           ),
         ),
       ),
-
-      /*actions: [
-        RaisedButton(
-            child: Text("Update"),
-            onPressed: () {
-              print(title);
-              databaseHelper.modidifyExercice(Exercice(exercice.id, title, exercice.image, detail, exercice.categories));
-
-              //Navigator.of(context).pushReplacement(databaseHelper.getExerciceList().then((value) => ExerciseListViewWidget(value)));
-              //databaseHelper.getExerciceList().then((value) => Navigator.push(context, MaterialPageRoute(builder: (context) => )));
-
-              Navigator.pop(context);
-              Navigator.of(context).pop(false);
-
-            }
-        )
-      ],*/
-
-/*      actions: [
-        RaisedButton(
-            child: Text("Update"),
-            onPressed: () {
-              print(title);
-              databaseHelper.modidifyExercice(Exercice(exercice.id, title, exercice.image, detail, exercice.categories));
-
-              //Navigator.of(context).pushReplacement(databaseHelper.getExerciceList().then((value) => ExerciseListViewWidget(value)));
-              //databaseHelper.getExerciceList().then((value) => Navigator.push(context, MaterialPageRoute(builder: (context) => )));
-
-              Navigator.pop(context);
-              Navigator.of(context).pop(false);
-
-            }
-        )
-      ],*/
     );
-
   }
-
-/*  String getCategories() {
-    String categories = "";
-    databaseHelper.getCategorieList().then((value) => value.forEach((element) {
-      print(element.name);
-      categories += element.name;
-      print(categories);
-    }));
-   return categories.toString();
-  }*/
 }

@@ -4,7 +4,7 @@ class Categorie {
   int _id;
   String _name;
   String _image;
-  List<dynamic> _objectives;
+  List<int> _objectives;
 
   Categorie(this._id, this._name, this._image, this._objectives);
 
@@ -12,7 +12,7 @@ class Categorie {
   int get id => _id;
   String get name => _name;
   String get image => _image;
-  List<dynamic> get objectives => _objectives;
+  List<int> get objectives => _objectives;
 
   // Getters & Setters
   set id(int id) {
@@ -30,7 +30,7 @@ class Categorie {
     _image = image;
   }
 
-  set objectives(List<dynamic> objectives) {
+  set objectives(List<int> objectives) {
     _objectives = objectives;
   }
 
