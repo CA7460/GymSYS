@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'exercise_addnew_widget.dart';
 
 class AdatpativeAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String _title;
@@ -32,7 +33,23 @@ class AdatpativeAppBar extends StatelessWidget implements PreferredSizeWidget {
                     value: 2,
                     child: Text('Modify content'),
                   ),
-                ])
+                ]),
+
+        Container(
+            color: Color(0xff3c505e),
+            child:
+
+            new IconButton(
+                padding: new EdgeInsets.all(0.0),
+                icon: new Icon(Icons.add, size: 23.0, color: Color(0xffffffff)),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ExerciseAddNewWidget()),
+                  );
+                }
+            )
+        )
       ],
     );
   }
@@ -41,3 +58,6 @@ class AdatpativeAppBar extends StatelessWidget implements PreferredSizeWidget {
     print('you selected option $item');
   }
 }
+
+
+

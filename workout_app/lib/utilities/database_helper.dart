@@ -61,7 +61,7 @@ class DatabaseHelper {
     print(path);
 
     // effacer la database rapidement, laisser en commentaire, pour test seulement 
-    // await deleteDatabase(path);
+     //await deleteDatabase(path);
 
     //Créer et ouvrir la base de données
     var workoutDB = await openDatabase(path, version: 1, onCreate: _createDb);
