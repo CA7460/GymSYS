@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:workout_app/utilities/database_helper.dart';
 import 'package:workout_app/models/exercices.dart';
 import 'package:workout_app/widgets/appbar.dart';
-import 'package:workout_app/services/services.dart';
+//import 'package:workout_app/services/services.dart';
 import 'package:workout_app/models/details.dart';
 import 'package:workout_app/models/expansion_item.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -48,7 +48,6 @@ class ExerciceDetailsScreenWidget extends StatelessWidget {
                     Object? donneesDetails = snapshot.data;
                     List<Details> detailsList = donneesDetails as List<Details>;
                     Details details = detailsList[0];
-
                     // Utiliser le if statement pour remplir une collection
                     expansionItems = <ExpansionItem>[
                       ExpansionItem(
@@ -64,7 +63,10 @@ class ExerciceDetailsScreenWidget extends StatelessWidget {
                             content: details.execution),
                     ];
 
-                    var url = details.youtubeLink;
+                    // Vérifier la validité du lien YOUTUBE sinon vidéo par défaut
+                    // Voir si on peut aussi avertir l'usager dès l'entrée de données 
+                    var url = YoutubePlayer.convertUrlToId(details.youtubeLink) != null ? 
+                      details.youtubeLink : "https://www.youtube.com/watch?v=xqolRM2_HTQ";
 
                     YoutubePlayerController _controller =
                         YoutubePlayerController(
@@ -123,7 +125,8 @@ class ExerciceDetailsScreenWidget extends StatelessWidget {
 
   Future<List<Details>> _loadDetailsFromDatabase(int id) async {
     await databaseHelper.initializeDatabase();
-    List<Details> detailsListMap = await databaseHelper.getDetailsForExercice(id);
+    List<Details> detailsListMap =
+        await databaseHelper.getDetailsForExercice(id);
     return detailsListMap;
   }
 }

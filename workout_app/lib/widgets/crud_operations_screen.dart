@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-//import 'package:string_validator/string_validator.dart';
 import 'package:workout_app/utilities/database_helper.dart';
-//import 'package:intl/intl.dart';
 import 'package:workout_app/models/exercices.dart';
-import 'package:workout_app/models/categorie.dart';
 import 'package:workout_app/models/details.dart';
 import 'package:workout_app/widgets/appbar.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class ExerciceOperations extends StatefulWidget {
   final String _action;
@@ -46,7 +44,24 @@ class _ExerciceOperationsState extends State<ExerciceOperations> {
     "Focus"
   ];
 
-  String _selectedCategory = "";
+  // Sera rempli à l'initialisation de la page
+  // Avec la méthode checkCategories()
+  final _categorieList = <String, bool>{};
+  // = {
+  //   "Biceps": false,
+  //   "Triceps": false,
+  //   "Épaules": false,
+  //   "Dos": false,
+  //   "Abdominaux": false,
+  //   "Pectoraux": false,
+  //   "Jambes": false,
+  //   "Course": false,
+  //   "Fessiers": false,
+  //   "Étirements": false,
+  //   "Focus": false
+  // };
+
+  var categHolder = [];
 
   TextEditingController nameController = TextEditingController();
   TextEditingController shortDescController = TextEditingController();
@@ -64,7 +79,7 @@ class _ExerciceOperationsState extends State<ExerciceOperations> {
     super.initState();
     //Pour modifier et enlever
 
-    _selectedCategory = _categoryName;
+    checkCategories();
     nameController.text = _exercice.name;
     shortDescController.text = _exercice.description;
     longDescController.text = _details.longDescription;
@@ -73,11 +88,24 @@ class _ExerciceOperationsState extends State<ExerciceOperations> {
     youtubeLinkController.text = _details.youtubeLink;
   }
 
+  void checkCategories() {
+    List<String> categoriesString = _exercice.categories.split(",");
+    
+    int index = 1;
+    _categories.forEach((categorie) {
+      if (categoriesString.contains(index.toString()) || categorie == _categoryName) {
+        _categorieList[categorie] = true;
+      } else {
+        _categorieList[categorie] = false;
+      }
+      index++;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final AdatpativeAppBar operationsAppBar =
         AdatpativeAppBar(widget._action.toUpperCase());
-
     bool _isModificationButtonVisible = true;
     bool _isDeleteButtonVisible = true;
     bool _isAddButtonVisible = false;
@@ -97,61 +125,35 @@ class _ExerciceOperationsState extends State<ExerciceOperations> {
             child: ListView(
               children: <Widget>[
                 WorkoutAppLogo(),
-
                 // =========== Exercice NAME =================
                 Padding(
                   padding: EdgeInsets.only(top: 5, bottom: 5),
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: TextFormField(
-                          controller: nameController,
-                          onChanged: (value) {
-                            _exercice.name = nameController.text;
-                          },
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Entrer un nom';
-                            } else if (value.contains(RegExp(r'[0-9]'))) {
-                              return 'Le nom ne doit pas contenir de chiffre';
-                            }
-                            //return null
-                          },
-                          // style: textStyle,
-                          keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
-                            labelText: 'Nom de l\'exercice',
-                            errorStyle: TextStyle(
-                              color: Colors.red,
-                              fontSize: 16.0,
-                            ),
-                          ),
-                        ),
+                  child: TextFormField(
+                    controller: nameController,
+                    onChanged: (value) {
+                      _exercice.name = nameController.text;
+                    },
+                    validator: (value) {
+                        if (value != "") {
+                          return value!.length < 30
+                              ? null
+                              : 'Maximum 30 caractères';
+                        } else if (value!.contains(RegExp(r'[0-9]'))) {
+                          return 'Le nom ne doit pas contenir de chiffre';
+                        } else {
+                          return 'Entrer un nom';
+                        }
+                    },
+                    keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                      labelText: 'Nom de l\'exercice',
+                      errorStyle: TextStyle(
+                        color: Colors.red,
+                        fontSize: 16.0,
                       ),
-                      Container(
-                        width: 25,
-                      ),
-                      Expanded(
-                        child: DropdownButton<String>(
-                          items: _categories.map((String uneCateg) {
-                            return DropdownMenuItem<String>(
-                              value: uneCateg,
-                              child: Text(uneCateg),
-                            );
-                          }).toList(),
-                          value: _selectedCategory,
-                          onChanged: (String? categ) {
-                            setState(() {
-                              _selectedCategory = categ!;
-                              print(_selectedCategory);
-                            });
-                          },
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
-
                 // =========== SHORT DESCRIPTION =================
                 Padding(
                   padding: EdgeInsets.only(top: 5, bottom: 5),
@@ -160,12 +162,11 @@ class _ExerciceOperationsState extends State<ExerciceOperations> {
                     onChanged: (value) {
                       _exercice.description = shortDescController.text;
                     },
-                    // validator: (String value) {
-                    //   if (value.isEmpty) {
-                    //     return 'Vous devez entrer un rÃ©alisateur';
-                    //   }
-                    // },
-                    // style: textStyle,
+                    validator: (value) {
+                      if (value == "") {
+                        return 'Entrer une courte description';
+                      }
+                    },
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                       labelText: 'Courte description',
@@ -176,7 +177,6 @@ class _ExerciceOperationsState extends State<ExerciceOperations> {
                     ),
                   ),
                 ),
-
                 // =========== Long Description =================
                 Padding(
                   padding: EdgeInsets.only(top: 5, bottom: 5),
@@ -185,12 +185,11 @@ class _ExerciceOperationsState extends State<ExerciceOperations> {
                     onChanged: (value) {
                       _details.longDescription = longDescController.text;
                     },
-                    validator: (String? value) {
+                    validator: (value) {
                       if (value == "") {
-                        return 'Vous devez entrer un titre';
+                        return 'Entrer une description détaillée';
                       }
                     },
-                    //style: textStyle,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                       labelText: 'Longue description',
@@ -199,13 +198,9 @@ class _ExerciceOperationsState extends State<ExerciceOperations> {
                         color: Colors.red,
                         fontSize: 16.0,
                       ),
-                      // border: OutlineInputBorder(
-                      //   borderRadius: BorderRadius.circular(5.0),
-                      // ),
                     ),
                   ),
                 ),
-
                 // =========== MUSCLE (non required) =================
                 Padding(
                   padding: EdgeInsets.only(top: 5, bottom: 5),
@@ -255,8 +250,7 @@ class _ExerciceOperationsState extends State<ExerciceOperations> {
                     ),
                   ),
                 ),
-
-                // =========== Youtube Link==========================
+                // ================ Youtube Link==========================
                 Padding(
                   padding: EdgeInsets.only(top: 5, bottom: 5),
                   child: TextFormField(
@@ -264,12 +258,15 @@ class _ExerciceOperationsState extends State<ExerciceOperations> {
                     onChanged: (value) {
                       _details.youtubeLink = youtubeLinkController.text;
                     },
-                    // validator: (String value) {
-                    //   if (value.isEmpty) {
-                    //     return 'Vous devez entrer un rÃ©alisateur';
-                    //   }
-                    // },
-                    // style: textStyle,
+                    validator: (value) {
+                      if (value != "") {
+                        return YoutubePlayer.convertUrlToId(value!) != null
+                            ? null
+                            : 'URL Youtube non valide';
+                      } else {
+                        return 'Entrer un lien URL Youtube';
+                      }
+                    },
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                       labelText: 'Lien Youtube',
@@ -280,7 +277,37 @@ class _ExerciceOperationsState extends State<ExerciceOperations> {
                     ),
                   ),
                 ),
-
+                // ================= CheckBoxes ==========================
+                SizedBox(
+                  height: 25,
+                ),
+                Text(
+                  'Catégories',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                Expanded(
+                  child: ListView(
+                    shrinkWrap: true,
+                    physics: const ClampingScrollPhysics(),
+                    children: _categorieList.keys.map((String key) {
+                      return CheckboxListTile(
+                        title: Text(key),
+                        value: _categorieList[key],
+                        activeColor: Colors.deepPurple[400],
+                        checkColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            _categorieList[key] = value!;
+                          });
+                        },
+                      );
+                    }).toList(),
+                  ),
+                ),
+                // ====================== buttons ==================
                 Padding(
                   padding: EdgeInsets.only(bottom: 5, top: 5),
                   child: Row(
@@ -289,8 +316,8 @@ class _ExerciceOperationsState extends State<ExerciceOperations> {
                         visible: _isModificationButtonVisible,
                         child: Expanded(
                           child: RaisedButton(
-                            color: Theme.of(context).accentColor,
-                            textColor: Theme.of(context).cardColor,
+                            color: Color(0xff3c505e),
+                            textColor: Colors.white,
                             child: Text(
                               'Modifier',
                               textScaleFactor: 1.5,
@@ -307,8 +334,8 @@ class _ExerciceOperationsState extends State<ExerciceOperations> {
                         visible: _isDeleteButtonVisible,
                         child: Expanded(
                           child: RaisedButton(
-                            color: Colors.redAccent,
-                            textColor: Theme.of(context).cardColor,
+                            color: Color(0xff3c505e),
+                            textColor: Colors.white,
                             child: Text(
                               'Enlever',
                               textScaleFactor: 1.5,
@@ -325,16 +352,19 @@ class _ExerciceOperationsState extends State<ExerciceOperations> {
                         visible: _isAddButtonVisible,
                         child: Expanded(
                           child: RaisedButton(
-                            color: Colors.redAccent,
-                            textColor: Theme.of(context).cardColor,
+                            color: Color(0xff3c505e),
+                            textColor: Colors.white,
                             child: Text(
                               'Enregistrer',
                               textScaleFactor: 1.5,
                             ),
                             onPressed: () async {
-                              String reponse =
-                                  await _enregistrerChangements('enregistrer');
-                              Navigator.pop(context, reponse);
+                              //check if at least one checkbox is checked
+                              if (_formEnregKey.currentState!.validate()) {
+                                String reponse = await _enregistrerChangements(
+                                    'enregistrer');
+                                Navigator.pop(context, reponse);
+                              }
                             },
                           ),
                         ),
@@ -365,19 +395,12 @@ class _ExerciceOperationsState extends State<ExerciceOperations> {
     String msg;
     _exercice.name = nameController.text;
     _exercice.description = shortDescController.text;
-
-    // _exercice.image = _exercice.image; // use actual image or default path for new exercice
-    print(_exercice.categories);
-
-    _exercice.categories = "1,2,3";
-    // for test only, use checkboxes values instead
+    _exercice.categories = getCheckedCategories();
 
     _details.longDescription = longDescController.text;
     _details.muscles = musclesController.text;
     _details.execution = executionController.text;
     _details.youtubeLink = youtubeLinkController.text;
-
-    print('tout est prêt');
 
     if (provenance == 'modifier') {
       resultat = await databaseHelper.modidifyExercice(_exercice);
@@ -385,24 +408,21 @@ class _ExerciceOperationsState extends State<ExerciceOperations> {
       msg = 'modifié';
     } else if (provenance == 'enlever') {
       resultat = await databaseHelper.removeExercice(_exercice.id);
-      resultat = await databaseHelper.removeDetails(_details.id);
+      resultat = await databaseHelper
+          .removeDetails(_exercice.id); // utiliser le id de l'exercice
       msg = 'enlevé';
     } else {
-      //enregistrer
-      //_exercice.id = null;
-      //_details.id = null;
-      print('about to add content to databse: type of categories: ' +
-          _exercice.categories.runtimeType.toString());
+      // Adding a default image 
       _exercice.image = "assets/images/exercices/default_img.jpg";
 
       resultat = await databaseHelper
           .addExercice(_exercice); //Retourne le dernier id inséré
       _exercice.id = resultat;
-      print("$resultat : ID du 1er add exercice");
+
+      // lien avec l'autre table 
+      _details.exerciceID = _exercice.id;
       resultat = await databaseHelper.addDetails(_details);
       _details.id = resultat;
-      print("$resultat : ID du 2e add details");
-      _details.exerciceID = _exercice.id;
 
       msg = 'enregistré';
     }
@@ -412,6 +432,21 @@ class _ExerciceOperationsState extends State<ExerciceOperations> {
       msg = "Exercice no " + _exercice.id.toString() + " n'a pu être $msg";
     }
     return msg;
+  }
+
+  String getCheckedCategories() {
+    String categories = "";
+    int index = 1;
+
+    _categorieList.forEach((key, value) {
+      if (value == true) {
+        categories += index.toString();
+        categories += ",";
+        categHolder.add(key);
+      }
+      index++;
+    });
+    return categories;
   }
 }
 

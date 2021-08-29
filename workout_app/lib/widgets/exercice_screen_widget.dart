@@ -79,6 +79,7 @@ class ExerciceListViewState extends State<ExerciseScreenWidget> {
             updateListView();
             showSnackBar(snackBarMsg);
           },
+          backgroundColor: /*Color(0xff3c505e)*/ Colors.purple,
           tooltip: 'Ajouter un exercice',
           child: Icon(Icons.add),
         ),
@@ -131,7 +132,7 @@ class ExerciseListView extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return InkWell(
       onTap: () {
-        print(index);
+        print(exercices[index].name);
         navigerEcrans(context, ExerciceDetailsScreenWidget(exercices[index]));
       },
       child: Padding(
@@ -232,16 +233,16 @@ class ExerciseListView extends StatelessWidget {
                               child: Text(
                                 exercices[index].name,
                                 style: TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16,
                                     color: Color(0xff489b9b)),
                                 maxLines: 2,
                               ),
                             ),
-                            SizedBox(height: 8),
+                            SizedBox(height: 12),
                             Text(
                               exercices[index].description,
-                              maxLines: 4,
+                              maxLines: 5,
                               style: TextStyle(
                                   fontWeight: FontWeight.w100,
                                   fontSize: 14,
@@ -283,13 +284,16 @@ class ExerciseListView extends StatelessWidget {
       resultat = await databaseHelper.removeExercice(exercices[index].id);
       print('ok');
       resultat = await databaseHelper.removeDetails(exercices[index].id);
+
+      if (resultat != 0) {
+        _snackBarMsg = 'L\'exercice a été supprimé';
+      } else {
+        _snackBarMsg = 'L\'exercice n\'a pu être supprimé';
+      }
+
     }
 
-    if (resultat != 0) {
-      _snackBarMsg = 'L\'exercice a été supprimé';
-    } else {
-      _snackBarMsg = 'L\'exercice n\'a pu être supprimé';
-    }
+ 
 
     await _listViewStateInstance.updateListView();
     await _listViewStateInstance.showSnackBar(_snackBarMsg);

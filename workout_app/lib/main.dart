@@ -30,8 +30,4 @@ class WorkoutApp extends StatelessWidget {
       ),
     );
   }
-
-  void _onSelected(BuildContext context, int item) {
-    print('you selected option $item');
-  }
 }
