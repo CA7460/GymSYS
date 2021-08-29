@@ -22,7 +22,7 @@ class Exercice {
   }
 
   set name(String name) {
-    if (name.length <= 20) {
+    if (name.length <= 40) {
       _name = name;
     }
   }

@@ -16,28 +16,29 @@ class AdatpativeAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Color(0xff3c505e),
       title: Text(_title, style: TextStyle(color: Color(0xff489b9b))),
       //centerTitle: true,
-      actions: [
-        PopupMenuButton(
-            onSelected: (item) => _onSelected(context, item as int),
-            itemBuilder: (context) => [
-                  PopupMenuItem(
-                    value: 0,
-                    child: Text('Add content'),
-                  ),
-                  PopupMenuItem(
-                    value: 1,
-                    child: Text('Remove content'),
-                  ),
-                  PopupMenuItem(
-                    value: 2,
-                    child: Text('Modify content'),
-                  ),
-                ])
-      ],
-    );
-  }
+      //     actions: [
+      //       PopupMenuButton(
+      //           onSelected: (item) => _onSelected(context, item as int),
+      //           itemBuilder: (context) => [
+      //                 PopupMenuItem(
+      //                   value: 0,
+      //                   child: Text('Add content'),
+      //                 ),
+      //                 PopupMenuItem(
+      //                   value: 1,
+      //                   child: Text('Remove content'),
+      //                 ),
+      //                 PopupMenuItem(
+      //                   value: 2,
+      //                   child: Text('Modify content'),
+      //                 ),
+      //               ])
+      //     ],
+      //   );
+      // }
 
-  void _onSelected(BuildContext context, int item) {
-    print('you selected option $item');
+      // void _onSelected(BuildContext context, int item) {
+      //   print('you selected option $item');
+    );
   }
 }

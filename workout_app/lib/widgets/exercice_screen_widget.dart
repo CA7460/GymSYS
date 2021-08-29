@@ -79,7 +79,7 @@ class ExerciceListViewState extends State<ExerciseScreenWidget> {
             updateListView();
             showSnackBar(snackBarMsg);
           },
-          backgroundColor: /*Color(0xff3c505e)*/ Colors.purple,
+          backgroundColor: Color(0xff489b9b),
           tooltip: 'Ajouter un exercice',
           child: Icon(Icons.add),
         ),
