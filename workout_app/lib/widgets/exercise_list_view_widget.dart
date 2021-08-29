@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:workout_app/widgets/exercice_details_screen_widget.dart';
 import 'package:workout_app/models/exercices.dart';
 
-Future navigerEcrans(context, ecran) async {
-  Navigator.push(context, MaterialPageRoute(builder: (context) => ecran));
+Future<String> navigerEcrans(context, ecran) async {
+  String reponse = await Navigator.push(
+      context, MaterialPageRoute(builder: (context) => ecran));
+  return reponse;
 }
 
 class ExerciseListViewWidget extends StatelessWidget {
@@ -82,7 +84,7 @@ class ExerciseListViewWidget extends StatelessWidget {
                               _onSelected(context, item as int),
                           itemBuilder: (context) => [
                                 PopupMenuItem(
-                                  value: 0,
+                                  value: 1,
                                   child: Row(
                                     children: <Widget>[
                                       Icon(
