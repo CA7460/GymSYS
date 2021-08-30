@@ -1,29 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:workout_app/widgets/appbar.dart';
 import 'package:workout_app/widgets/exercise_widget.dart';
 
 void main() => runApp(WorkoutApp());
 
 class WorkoutApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
+    final AdatpativeAppBar homeAppBar = AdatpativeAppBar('WORKOUT GOALS');
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SafeArea(
         child: Scaffold(
           backgroundColor: Color(0xff3a4155),
-          appBar: AppBar(
-            title: Text('WORKOUT APP', style: TextStyle(color: Color(0xff489b9b))),
-            centerTitle: true,
-            backgroundColor: Color(0xff3c505e),
-          ),
+          appBar: homeAppBar,
           body: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/background/background_image1.jpg'),
+                image: AssetImage(
+                    'assets/images/background/background_image1.jpg'),
                 fit: BoxFit.cover,
               ),
             ),
-            child: ExerciseWidget(), //aussi new EcranDepart() mais le new n'est pas obligatoire
+            child:
+                ExerciseWidget(), //aussi new EcranDepart() mais le new n'est pas obligatoire
           ),
         ),
       ),

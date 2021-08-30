@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/widgets/category_show_widget.dart';
+import 'package:workout_app/widgets/appbar.dart';
 
 class CategoryScreenWidget extends StatelessWidget {
   final int id;
   final String category;
-  CategoryScreenWidget (this.id, this.category);
+  CategoryScreenWidget(this.id, this.category);
 
   @override
   Widget build(BuildContext context) {
+    final AdatpativeAppBar categoryAppBar = AdatpativeAppBar(category.toUpperCase());
     return SafeArea(
       child: Scaffold(
         backgroundColor: Color(0xff3a4155),
-        appBar: AppBar(
-          title: Text(category, style: TextStyle(color: Color(0xff489b9b))),
-          centerTitle: true,
-          backgroundColor: Color(0xff3c505e),
-        ),
+        appBar: categoryAppBar,
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -23,7 +21,7 @@ class CategoryScreenWidget extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          child: CategoryShowWidget(this.id),
+          child: CategoryShowWidget(id),
         ),
       ),
     );
